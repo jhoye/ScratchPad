@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Buttons Prototype</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body {
+                background-color:#eee;
+            }
+            #buttons br {
+                clear:left;
+            }
+            #buttons a {
+                cursor:pointer;
+                float:left;
+                margin:0 3px 3px 0;
+                position:relative;
+                display:block;
+                border:1px #eee solid;
+                background:#eee;
+            }
+            #buttons a:hover {
+                border:1px #888 solid;
+                background:#eee;
+            }
+            #buttons a:active {
+                border:1px #888 solid;
+                background:#fff;
+            }
+            #buttons a.selected {
+                border:1px #888 solid;
+                background:#fff;
+            }
+            
+            #buttons span {
+                position:relative;
+                display:block;
+                overflow:hidden;
+                height:6px;
+                width:6px;
+                left:3px;
+                top:3px;
+            }
+            #buttons img {
+                position:relative;
+                left:-3px;
+            }
+            
+            #block { width:12px; height:12px; }
+            #block span { }
+            #block img { top:-3px; }
+            
+            #beehive { height:15px; width:18px; }
+            #beehive span { height:9px; width:12px; }
+            #beehive img { top:-12px; }
+            
+            #loaf { height:18px; width:18px; }
+            #loaf span { height:12px; width:12px; }
+            #loaf img { top:-24px; }
+            
+            #boat { height:15px; width:15px; }
+            #boat span { height:9px; width:9px; }
+            #boat img { top:-39px; }
+            
+            #blinker { height:15px; width:9px; }
+            #blinker span { height:9px; width:9px; left:0px; }
+            #blinker img { top:-51px; }
+            
+            #toad { height:18px; width:18px; }
+            #toad span { height:12px; width:12px; }
+            #toad img { top:-63px; }
+            
+            #beacon { height:18px; width:18px; }
+            #beacon span { height:12px; width:12px; }
+            #beacon img { top:-78px; }
+            
+            #pulsar { height:45px; width:45px; }
+            #pulsar span { height:39px; width:39px; }
+            #pulsar img { top:-96px; left:-6px; }
+            
+            #glider1 { height:15px; width:15px; }
+            #glider1 span { height:9px; width:9px; }
+            #glider1 img { top:-141px; }
+            
+            #glider2 { height:15px; width:15px; }
+            #glider2 span { height:9px; width:9px; }
+            #glider2 img { top:-141px; left:-15px; }
+            
+            #glider3 { height:15px; width:15px; }
+            #glider3 span { height:9px; width:9px; }
+            #glider3 img { top:-141px; left:-27px; }
+            
+            #glider4 { height:15px; width:15px; }
+            #glider4 span { height:9px; width:9px; }
+            #glider4 img { top:-141px; left:-39px; }
+            
+            #lwss1 { height:18px; width:21px; }
+            #lwss1 span { height:12px; width:15px; }
+            #lwss1 img { top:-153px; }
+            
+            #lwss2 { height:18px; width:21px; }
+            #lwss2 span { height:12px; width:15px; }
+            #lwss2 img { top:-153px; left:-21px; }
+            
+            #lwss3 { height:21px; width:18px; }
+            #lwss3 span { height:15px; width:12px; }
+            #lwss3 img { top:-153px; left:-39px; }
+            
+            #lwss4 { height:21px; width:18px; }
+            #lwss4 span { height:15px; width:12px; }
+            #lwss4 img { top:-153px; left:-54px; }
+            
+            #fpentamino { height:15px; width:15px; }
+            #fpentamino span { height:9px; width:9px; }
+            #fpentamino img { top:-168px; }
+            
+            #diehard { height:15px; width:30px; }
+            #diehard span { height:9px; width:24px; }
+            #diehard img { top:-180px; }
+            
+            #acorn { height:15px; width:27px; }
+            #acorn span { height:9px; width:21px; }
+            #acorn img { top:-192px; }
+            
+            #glidergun { height:33px; width:114px; }
+            #glidergun span { height:27px; width:108px; }
+            #glidergun img { top:-204px; }
+            
+            #infinite1 { height:24px; width:30px; }
+            #infinite1 span { height:18px; width:24px; }
+            #infinite1 img { top:-234px; }
+            
+            #infinite2 { height:21px; width:21px; }
+            #infinite2 span { height:15px; width:15px; }
+            #infinite2 img { top:-255px; }
+            
+            #infinite3 { height:9px; width:123px; }
+            #infinite3 span { height:3px; width:117px; }
+            #infinite3 img { top:-273px; }
+        </style>
+    </head>
+    <body>
+        <div id="buttons">
+            <a id="block" class="selected"><span><img src="sprites.gif" alt="block" title="block" /></span></a>
+            <a id="beehive"><span><img src="sprites.gif" alt="beehive" title="beehive" /></span></a>
+            <a id="loaf"><span><img src="sprites.gif" alt="loaf" title="loaf" /></span></a>
+            <a id="boat"><span><img src="sprites.gif" alt="boat" title="boat" /></span></a>
+            <a id="blinker"><span><img src="sprites.gif" alt="blinker" title="blinker" /></span></a>
+            <a id="toad"><span><img src="sprites.gif" alt="toad" title="toad" /></span></a>
+            <a id="beacon"><span><img src="sprites.gif" alt="beacon" title="beacon" /></span></a>
+            <a id="pulsar"><span><img src="sprites.gif" alt="pulsar" title="pulsar" /></span></a>
+            <a id="glider1"><span><img src="sprites.gif" alt="glider" title="glider" /></span></a>
+            <a id="glider2"><span><img src="sprites.gif" alt="glider" title="glider" /></span></a>
+            <a id="glider3"><span><img src="sprites.gif" alt="glider" title="glider" /></span></a>
+            <a id="glider4"><span><img src="sprites.gif" alt="glider" title="glider" /></span></a>
+            <a id="lwss1"><span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship" /></span></a>
+            <a id="lwss2"><span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship" /></span></a>
+            <a id="lwss3"><span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship" /></span></a>
+            <a id="lwss4"><span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship" /></span></a>
+            <a id="fpentamino"><span><img src="sprites.gif" alt="f-pentamino" title="f-pentamino" /></span></a>
+            <a id="diehard"><span><img src="sprites.gif" alt="diehard" title="diehard" /></span></a>
+            <a id="acorn"><span><img src="sprites.gif" alt="acorn" title="acorn" /></span></a>
+            <a id="glidergun"><span><img src="sprites.gif" alt="" title="" /></span></a>
+            <a id="infinite1"><span><img src="sprites.gif" alt="infinite1" title="infinite1" /></span></a>
+            <a id="infinite2"><span><img src="sprites.gif" alt="infinite2" title="infinite2" /></span></a>
+            <a id="infinite3"><span><img src="sprites.gif" alt="infinite3" title="infinite3" /></span></a>
+            <br />
+        </div>
+        <div style="background:#ddd;">
+        <img src="sprites.gif" alt="" />
+        </div>
+    </body>
+</html>

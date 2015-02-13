@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game of Life</title>
+    <meta name="Description" content="John Horton Conway's Game of Life written in JavaScript" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="styles.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="buttons">
+        <a class="block selected">
+            <span><img src="sprites.gif" alt="block" title="block" /></span>
+        </a>
+        <a class="beehive">
+            <span><img src="sprites.gif" alt="beehive" title="beehive" /></span>
+        </a>
+        <a class="loaf">
+            <span><img src="sprites.gif" alt="loaf" title="loaf" /></span>
+        </a>
+        <a class="boat">
+            <span><img src="sprites.gif" alt="boat" title="boat" /></span>
+        </a>
+        <a class="blinker">
+            <span><img src="sprites.gif" alt="blinker" title="blinker" /></span>
+        </a>
+        <a class="toad">
+            <span><img src="sprites.gif" alt="toad" title="toad" /></span>
+        </a>
+        <a class="beacon">
+            <span><img src="sprites.gif" alt="beacon" title="beacon" /></span>
+        </a>
+        <a class="pulsar">
+            <span><img src="sprites.gif" alt="pulsar" title="pulsar" /></span>
+        </a>
+        <a class="glider1">
+            <span><img src="sprites.gif" alt="glider" title="glider &LowerRightArrow;" /></span>
+        </a>
+        <a class="glider2">
+            <span><img src="sprites.gif" alt="glider" title="glider &UpperLeftArrow;" /></span>
+        </a>
+        <a class="glider3">
+            <span><img src="sprites.gif" alt="glider" title="glider &LowerLeftArrow;" /></span>
+        </a>
+        <a class="glider4">
+            <span><img src="sprites.gif" alt="glider" title="glider &UpperRightArrow;" /></span>
+        </a>
+        <a class="lwss1">
+            <span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship &rarr;" /></span>
+        </a>
+        <a class="lwss2">
+            <span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship &larr;" /></span>
+        </a>
+        <a class="lwss3">
+            <span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship &darr;" /></span>
+        </a>
+        <a class="lwss4">
+            <span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship &uarr;" /></span>
+        </a>
+        <a class="fpentomino">
+            <span><img src="sprites.gif" alt="f-pentamino" title="f-pentamino" /></span>
+        </a>
+        <a class="diehard">
+            <span><img src="sprites.gif" alt="diehard" title="diehard" /></span>
+        </a>
+        <a class="acorn">
+            <span><img src="sprites.gif" alt="acorn" title="acorn" /></span>
+        </a>
+        <a class="glidergun">
+            <span><img src="sprites.gif" alt="" title="" /></span>
+        </a>
+        <a class="infinite1">
+            <span><img src="sprites.gif" alt="infinite1" title="infinite1" /></span>
+        </a>
+        <a class="infinite2">
+            <span><img src="sprites.gif" alt="infinite2" title="infinite2" /></span>
+        </a>
+        <a class="infinite3">
+            <span><img src="sprites.gif" alt="infinite3" title="infinite3" /></span>
+        </a>
+        <br />
+    </div>
+    <p>Click within the square to add life.</p>
+    <div>
+        <!-- supports only a square universe -->
+        <canvas id="universe" width="300" height="300"></canvas>
+    </div>
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="label">Cycle:</td>
+                    <td id="tdCycle">0</td>
+                </tr>
+                <tr>
+                    <td class="label">Pixels:</td>
+                    <td id="tdBeings">0</td>
+                </tr>
+                <tr>
+                    <td class="label">Births:</td>
+                    <td id="tdBirths">0</td>
+                </tr>
+                <tr>
+                    <td class="label">Deaths:</td>
+                    <td id="tdDeaths">0</td>
+                </tr>
+                <tr>
+                    <td class="label">Alive:</td>
+                    <td id="tdIsLiving">no</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <select id="interval">
+            <option value="1024">1024</option>
+            <option value="512">512</option>
+            <option value="256">256</option>
+            <option value="128">128</option>
+            <option value="64">64</option>
+            <option value="32" selected="selected">32</option>
+            <option value="16">16</option>
+            <option value="8">8</option>
+            <option value="4">4</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+        <label for="interval">milliseconds per cycle</label>
+    </div>
+    <div>
+        <input id="doomsday" type="button" value="Destroy Everything" />
+    </div>
+    <script src="jquery-1.8.0.min.js"></script>
+    <script src="life.js"></script>
+    <script src="behavior.js"></script>
+    <script type="text/javascript">
+
+    life.Create();
+
+    </script>
+</body>
+</html>
