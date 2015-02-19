@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UI Prototype - Infinite Scroll</title>
+    <meta name="Description" content="Prototype/demonstration of answers to unasked questions about the Òinfinite scrollÓ user interface" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="styles.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+
+    <ul id="scrollingList" data-bind="foreach: Items">
+        <li data-bind="text: Article"></li>
+    </ul>
+    
+    <footer id="footer">loading...</footer>
+
+    <script src="jquery-1.8.0.min.js"></script>
+    <script src="knockout-3.2.0.js"></script>
+    <script src="infiniteScroll.js"></script>
+    <script src="behavior.js"></script>
+</body>
+</html>
