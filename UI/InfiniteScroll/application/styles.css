@@ -1,4 +1,5 @@
 body { font:12px monospace; background: #eee; margin:0 auto; width:500px; }
-#scrollingList { display: none; margin:0; padding:0; }
+#scrollingList { display: none; margin:20px 0 0 0; padding:0; }
 #scrollingList li { margin:0 0 20px  20px; }
-#footer { display:block; background:#bbb; padding: 20px 0; text-align:center; visibility:hidden; }
+#header, #footer { display:block; background:#bbb; padding: 20px 0; text-align:center; }
+#footer { visibility:hidden; }

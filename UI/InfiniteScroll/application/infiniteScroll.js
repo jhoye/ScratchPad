@@ -8,7 +8,17 @@ var infiniteScroll = (function () {
         viewModel = {
             Items: ko.observableArray([])
         },
-        isLoading = false;
+        isLoading = false,
+        listenToScrolling = function () {
+            
+            var scrollTop = document.documentElement.scrollTop
+                    ? document.documentElement.scrollTop
+                    : document.body.scrollTop;
+            
+            if (document.body.offsetHeight <= scrollTop + document.documentElement.clientHeight) {
+                app.LoadNextPage();
+            }
+        };
 
     app.LoadNextPage = function () {
         
@@ -29,29 +39,31 @@ var infiniteScroll = (function () {
             }
             
             currentPage = currentPage + 1;
-        })
-        .done(function() {
             
             isLoading = false;
             
+            hideFooter();
         })
         .fail(function(e) {
-            if (typeof e === "object") {
-                console.dir(e);
-            } else {
-                console.log(e);
+            if (typeof e === "object" && e.status === 404) {
+                
+                footer.textContent = "Bottom of the Page";
+                
             }
-        })
-        .always(function() {
-            
-            hideFooter();
-            
         });
     };
     
-    app.Initialize = function (listId, footerId) {
-        ko.applyBindings(viewModel, document.getElementById(listId));
+    app.Initialize = function (scrollingListId, footerId) {
+        
+        var scrollingList = document.getElementById(scrollingListId);
+        
+        ko.applyBindings(viewModel, scrollingList);
+       
         footer = document.getElementById(footerId);
+        
+        scrollingList.style.display = "block";
+        
+        setInterval(listenToScrolling, 100);
     };
 
     return app;

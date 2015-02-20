@@ -7,16 +7,18 @@
     <link href="styles.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-
+    <header id="header">Top of the Page</header>
     <ul id="scrollingList" data-bind="foreach: Items">
         <li data-bind="text: Article"></li>
     </ul>
-    
     <footer id="footer">loading...</footer>
-
     <script src="jquery-1.8.0.min.js"></script>
     <script src="knockout-3.2.0.js"></script>
     <script src="infiniteScroll.js"></script>
-    <script src="behavior.js"></script>
+    <script type="text/javascript">
+    
+        infiniteScroll.Initialize("scrollingList", "footer");
+        
+    </script>
 </body>
 </html>
