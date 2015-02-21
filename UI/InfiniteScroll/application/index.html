@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UI Prototype - Infinite Scroll</title>
+    <meta name="Description" content="Prototype/demonstration of answers to unasked questions about the Òinfinite scrollÓ user interface" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="styles.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <aside id="sidebar">
+        <div id="sidebar-total">
+            <div id="sidebar-loaded"></div>
+        </div>
+    </aside>
+    <section id="scroll-content">
+        <header id="scroll-header">Top of the Page</header>
+        <ol id="scrolling-list" data-bind="foreach: Items">
+            <li data-bind="text: Article"></li>
+        </ol>
+        <footer id="scroll-footer"></footer>
+    </section>
+    <script src="jquery-1.8.0.min.js"></script>
+    <script src="knockout-3.2.0.js"></script>
+    <script src="infiniteScroll.js"></script>
+    <script type="text/javascript">
+        infiniteScroll.Initialize({
+            scrollingListId: "scrolling-list",
+            scrollFooterId: "scroll-footer",
+            sidebarId: "sidebar",
+            sidebarTotalId: "sidebar-total",
+            sidebarLoadedId: "sidebar-loaded"
+        });
+    </script>
+</body>
+</html>

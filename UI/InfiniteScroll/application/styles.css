@@ -1,0 +1,13 @@
+body { font:12px monospace; background: #eee; margin:0; }
+
+#sidebar { position:fixed; top:0px; right:20px; }
+#sidebar-total,
+#sidebar-loaded { width:20px; position:absolute; }
+#sidebar-total { background:#ccc; z-index:1; }
+#sidebar-loaded { width:14px; background:#aaa; left:3px; z-index:2; }
+
+#scroll-content { margin:0 auto; width:500px; }
+#scrolling-list { display: none; margin:20px 0 0 0; padding:0; }
+#scrolling-list li { margin:0 0 20px  20px; }
+#scroll-header, #scroll-footer { display:block; background:#bbb; padding: 20px 0; text-align:center; }
+#scroll-footer { visibility:hidden; }
