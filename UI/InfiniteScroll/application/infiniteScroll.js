@@ -1,21 +1,46 @@
 var infiniteScroll = (function () {
 
     var app = {},
-        footer = null,
-        showFooter = function () { footer.style.visibility = "visible"; },
-        hideFooter = function () { footer.style.visibility = "hidden"; },
-        currentPage = 0,
-        viewModel = {
-            Items: ko.observableArray([])
+        dom = {
+            scrollFooter: null,
+            sidebar: null,
+            sidebarTotal: null,
+            sidebarLoaded: null
         },
+        currentPage = 0,
+        itemCount = 0,
+        totalItemCount = 0,
+        pageSize = 0,
+        scrollTop = 0,
+        height = 0,
         isLoading = false,
-        listenToScrolling = function () {
+        isLoaded = false,
+        viewModel = { Items: ko.observableArray([]) },
+        setFooterText = function (text) { dom.scrollFooter.textContent = text; },
+        showFooter = function () { dom.scrollFooter.style.visibility = "visible"; },
+        hideFooter = function () { dom.scrollFooter.style.visibility = "hidden"; },
+        setHeight = function (e, h) { e.style.height = h + "px"; },
+        setSidebarHeights = function () {
             
-            var scrollTop = document.documentElement.scrollTop
+            setHeight(dom.sidebarTotal, height);
+            
+            setHeight(dom.sidebarLoaded, height * itemCount / totalItemCount);
+        },
+        listen = function () {
+            
+            if (isLoaded) {
+                return;
+            }
+            
+            scrollTop = document.documentElement.scrollTop
                     ? document.documentElement.scrollTop
                     : document.body.scrollTop;
             
-            if (document.body.offsetHeight <= scrollTop + document.documentElement.clientHeight) {
+            height = document.documentElement.clientHeight;
+            
+            setSidebarHeights();
+            
+            if (document.body.offsetHeight <= scrollTop + height) {
                 app.LoadNextPage();
             }
         };
@@ -28,6 +53,8 @@ var infiniteScroll = (function () {
         
         isLoading = true;
         
+        setFooterText("Loading...");
+        
         showFooter();
         
         $.getJSON("data/page" + (currentPage + 1) + ".json", function (d) {
@@ -38,6 +65,14 @@ var infiniteScroll = (function () {
                 viewModel.Items.push(d.Items[i]);
             }
             
+            itemCount = itemCount + d.Items.length;
+            
+            totalItemCount = d.TotalItemCount;
+            
+            if (pageSize === 0) {
+                pageSize = d.Items.length;
+            }
+            
             currentPage = currentPage + 1;
             
             isLoading = false;
@@ -45,25 +80,36 @@ var infiniteScroll = (function () {
             hideFooter();
         })
         .fail(function(e) {
+            
             if (typeof e === "object" && e.status === 404) {
                 
-                footer.textContent = "Bottom of the Page";
+                isLoaded = true;
+                
+                setFooterText("Bottom of the Page");
+                
+                dom.sidebar.style.display = "none";
                 
             }
         });
     };
     
-    app.Initialize = function (scrollingListId, footerId) {
+    app.Initialize = function (config) {
         
-        var scrollingList = document.getElementById(scrollingListId);
+        var scrollingList = document.getElementById(config.scrollingListId);
         
         ko.applyBindings(viewModel, scrollingList);
-       
-        footer = document.getElementById(footerId);
+        
+        dom.scrollFooter = document.getElementById(config.scrollFooterId);
+        
+        dom.sidebar = document.getElementById(config.sidebarId);
+        
+        dom.sidebarTotal = document.getElementById(config.sidebarTotalId);
+        
+        dom.sidebarLoaded = document.getElementById(config.sidebarLoadedId);
         
         scrollingList.style.display = "block";
         
-        setInterval(listenToScrolling, 100);
+        setInterval(listen, 100);
     };
 
     return app;

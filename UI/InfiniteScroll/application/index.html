@@ -7,18 +7,29 @@
     <link href="styles.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-    <header id="header">Top of the Page</header>
-    <ul id="scrollingList" data-bind="foreach: Items">
-        <li data-bind="text: Article"></li>
-    </ul>
-    <footer id="footer">loading...</footer>
+    <aside id="sidebar">
+        <div id="sidebar-total">
+            <div id="sidebar-loaded"></div>
+        </div>
+    </aside>
+    <section id="scroll-content">
+        <header id="scroll-header">Top of the Page</header>
+        <ul id="scrolling-list" data-bind="foreach: Items">
+            <li data-bind="text: Article"></li>
+        </ul>
+        <footer id="scroll-footer"></footer>
+    </section>
     <script src="jquery-1.8.0.min.js"></script>
     <script src="knockout-3.2.0.js"></script>
     <script src="infiniteScroll.js"></script>
     <script type="text/javascript">
-    
-        infiniteScroll.Initialize("scrollingList", "footer");
-        
+        infiniteScroll.Initialize({
+            scrollingListId: "scrolling-list",
+            scrollFooterId: "scroll-footer",
+            sidebarId: "sidebar",
+            sidebarTotalId: "sidebar-total",
+            sidebarLoadedId: "sidebar-loaded"
+        });
     </script>
 </body>
 </html>
