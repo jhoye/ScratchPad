@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 Canvas and Data URLs </title>
+    <meta name="Description" content="Using canvas graphics to generate a data URL." />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+    body { background: #eee; }
+    div { height:300px; width:300px; float:left; margin:0 5px 5px 0; }
+    .grid { border-left: 1px #bbb solid; border-top: 1px #bbb solid; background:#fff url(data:image/gif;base64,R0lGODlhFAAUAIAAAMDAwP///yH5BAEAAAEALAAAAAAUABQAAAImhI+pwe3vAJxQ0hssnnq/7jVgmJGfGaGiyoyh68GbjNGXTeEcGxQAOw==) -1px -1px; }
+    textarea { border: 1px #000 solid; height:300px; width:604px; display:block; }
+    br { clear: left; }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <canvas id="graphics" width="300" height="300"></canvas>
+    </div>
+    <div>
+        <img id="output" alt="output image" src="data:text/plain," />
+    </div>
+    <br />
+    <label for="text" id="textLabel"></label>
+    <textarea id="text" cols="1" rows="1"></textarea>
+    <script src="jquery-1.8.0.min.js"></script>
+    <script type="text/javascript">
+    
+        $(function () {
+            
+            var scale = 20,
+                graphics = document.getElementById("graphics"),
+                text = document.getElementById("text"),
+                output = document.getElementById("output"),
+                textLabel = document.getElementById("textLabel"),
+                plane = graphics.getContext("2d"),
+                generateDataUrl = function () {
+                    
+                    // canvas function
+                    var dataUrl = graphics.toDataURL("image/png");
+                    
+                    // output
+                    text.innerHTML = dataUrl;
+                    textLabel.innerHTML = dataUrl.length + " bytes:";
+                    output.src = dataUrl;
+                };
+                
+            plane.fillStyle = "#000";
+            generateDataUrl();
+                
+            $("#graphics").mouseup(function (e) {
+                
+                var offset = $(this).offset(),
+                    x = e.clientX - offset.left,
+                    y = e.clientY - offset.top,
+                    pixelData = plane.getImageData(x, y, 1, 1).data;
+                    
+                // fill or clear square graphics
+                if (pixelData[3] === 0 || pixelData[0] !== 0)
+                {
+                    plane.fillRect(x - (x % scale), y - (y % scale), scale, scale);
+                } else {
+                    plane.clearRect(x - (x % scale), y - (y % scale), scale, scale);
+                }
+                
+                generateDataUrl();
+            });
+        });
+        
+    </script>
+</body>
+</html>
