@@ -5,25 +5,28 @@
     <meta name="Description" content="Using canvas graphics to generate a data URL." />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style type="text/css">
-    body { background: #eee; }
-    div { height:300px; width:300px; float:left; margin:0 5px 5px 0; }
+    body { font:12px monospace; background: #eee; }
+    div { width:607px; margin:0 auto; }
+    .grid, .image { display:block; height:300px; width:300px; float:left; margin:0 5px 5px 0; }
     .grid { border-left: 1px #bbb solid; border-top: 1px #bbb solid; background:#fff url(data:image/gif;base64,R0lGODlhFAAUAIAAAMDAwP///yH5BAEAAAEALAAAAAAUABQAAAImhI+pwe3vAJxQ0hssnnq/7jVgmJGfGaGiyoyh68GbjNGXTeEcGxQAOw==) -1px -1px; }
     .image { margin:1px 0 0 0; }
-    textarea { border: 1px #000 solid; height:150px; width:604px; display:block; margin:0 0 5px 0; }
+    textarea { border: 1px #000 solid; height:150px; width:600px; display:block; margin:0 0 5px 0; }
     br { clear: left; }
     </style>
 </head>
 <body>
-    <div class="grid">
-        <canvas id="graphics" width="300" height="300"></canvas>
+    <div>
+        <span class="grid">
+            <canvas id="graphics" width="300" height="300"></canvas>
+        </span>
+        <span class="image">
+            <img id="output" alt="output image" src="data:text/plain," />
+        </span>
+        <br />
+        <label for="dataText" id="dataTextLabel"></label>
+        <textarea id="dataText" cols="1" rows="1"></textarea>
+        <textarea id="coordinatesText" cols="1" rows="1"></textarea>
     </div>
-    <div class="image">
-        <img id="output" alt="output image" src="data:text/plain," />
-    </div>
-    <br />
-    <label for="dataText" id="dataTextLabel"></label>
-    <textarea id="dataText" cols="1" rows="1"></textarea>
-    <textarea id="coordinatesText" cols="1" rows="1"></textarea>
     <script src="jquery-1.8.0.min.js"></script>
     <script src="json.js"></script>
     <script type="text/javascript">
@@ -40,13 +43,19 @@
                 generateDataUrl = function () {
                     
                     // canvas function
-                    var dataUrl = graphics.toDataURL("image/png");
+                    var dataUrl = graphics.toDataURL("image/png"),
+                        filled = coordinates.getFilled();
                     
                     // output
                     dataText.innerHTML = dataUrl;
                     dataTextLabel.innerHTML = dataUrl.length + " bytes:";
                     output.src = dataUrl;
-                    coordinatesText.innerHTML = JSON.stringify(coordinates.getFilled());
+                    console.dir(filled);
+                    try {
+                        coordinatesText.innerHTML = uneval(filled);
+                    } catch (e) {
+                        coordinatesText.innerHTML = JSON.stringify(filled);
+                    }
                 },
                 coordinates = (function () {
                     
@@ -80,7 +89,6 @@
                             
                             for (iy = 0; iy < m; iy++) {
                                 for (ix = 0; ix < m; ix++) {
-                                    //console.dir(grid[iy][ix]);
                                     if (grid[iy][ix].isFilled === true) {
                                         filled.push({ x: ix, y: iy });
                                     }
