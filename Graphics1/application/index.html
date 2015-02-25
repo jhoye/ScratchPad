@@ -8,7 +8,8 @@
     body { background: #eee; }
     div { height:300px; width:300px; float:left; margin:0 5px 5px 0; }
     .grid { border-left: 1px #bbb solid; border-top: 1px #bbb solid; background:#fff url(data:image/gif;base64,R0lGODlhFAAUAIAAAMDAwP///yH5BAEAAAEALAAAAAAUABQAAAImhI+pwe3vAJxQ0hssnnq/7jVgmJGfGaGiyoyh68GbjNGXTeEcGxQAOw==) -1px -1px; }
-    textarea { border: 1px #000 solid; height:300px; width:604px; display:block; }
+    .image { margin:1px 0 0 0; }
+    textarea { border: 1px #000 solid; height:150px; width:604px; display:block; margin:0 0 5px 0; }
     br { clear: left; }
     </style>
 </head>
@@ -16,22 +17,25 @@
     <div class="grid">
         <canvas id="graphics" width="300" height="300"></canvas>
     </div>
-    <div>
+    <div class="image">
         <img id="output" alt="output image" src="data:text/plain," />
     </div>
     <br />
-    <label for="text" id="textLabel"></label>
-    <textarea id="text" cols="1" rows="1"></textarea>
+    <label for="dataText" id="dataTextLabel"></label>
+    <textarea id="dataText" cols="1" rows="1"></textarea>
+    <textarea id="coordinatesText" cols="1" rows="1"></textarea>
     <script src="jquery-1.8.0.min.js"></script>
+    <script src="json.js"></script>
     <script type="text/javascript">
     
         $(function () {
             
             var scale = 20,
                 graphics = document.getElementById("graphics"),
-                text = document.getElementById("text"),
+                dataText = document.getElementById("dataText"),
+                coordinatesText = document.getElementById("coordinatesText"),
                 output = document.getElementById("output"),
-                textLabel = document.getElementById("textLabel"),
+                dataTextLabel = document.getElementById("dataTextLabel"),
                 plane = graphics.getContext("2d"),
                 generateDataUrl = function () {
                     
@@ -39,10 +43,54 @@
                     var dataUrl = graphics.toDataURL("image/png");
                     
                     // output
-                    text.innerHTML = dataUrl;
-                    textLabel.innerHTML = dataUrl.length + " bytes:";
+                    dataText.innerHTML = dataUrl;
+                    dataTextLabel.innerHTML = dataUrl.length + " bytes:";
                     output.src = dataUrl;
-                };
+                    coordinatesText.innerHTML = JSON.stringify(coordinates.getFilled());
+                },
+                coordinates = (function () {
+                    
+                    var w = new Number(graphics.attributes["width"].value).valueOf(),
+                        m = (w - w % scale) / scale,
+                        grid = [],
+                        gx, ix, iy;
+                    
+                    for (iy = 0; iy < m; iy++) {
+                        gx = [];
+                        for (ix = 0; ix < m; ix++) {
+                            gx.push({
+                                isFilled: false,
+                                x: ix,
+                                y: iy
+                            });
+                        }
+                        grid.push(gx);
+                    }
+                    
+                    return {
+                        fill: function (x, y) {
+                            grid[y / scale][x / scale].isFilled = true;
+                        },
+                        clear: function (x, y) {
+                            grid[y / scale][x / scale].isFilled = false;
+                        },
+                        getFilled: function () {
+                            
+                            var filled = [];
+                            
+                            for (iy = 0; iy < m; iy++) {
+                                for (ix = 0; ix < m; ix++) {
+                                    //console.dir(grid[iy][ix]);
+                                    if (grid[iy][ix].isFilled === true) {
+                                        filled.push({ x: ix, y: iy });
+                                    }
+                                }
+                            }
+                            
+                            return filled;
+                        }
+                    };
+                })();
                 
             plane.fillStyle = "#000";
             generateDataUrl();
@@ -54,12 +102,18 @@
                     y = e.clientY - offset.top,
                     pixelData = plane.getImageData(x, y, 1, 1).data;
                     
+                // offset x and y based on scale
+                x = x - (x % scale);
+                y = y - (y % scale)
+                    
                 // fill or clear square graphics
                 if (pixelData[3] === 0 || pixelData[0] !== 0)
                 {
-                    plane.fillRect(x - (x % scale), y - (y % scale), scale, scale);
+                    plane.fillRect(x, y, scale, scale);
+                    coordinates.fill(x, y);
                 } else {
                     plane.clearRect(x - (x % scale), y - (y % scale), scale, scale);
+                    coordinates.clear(x, y);
                 }
                 
                 generateDataUrl();
