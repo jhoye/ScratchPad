@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XHR Methods and Status Codes</title>
+    <meta name="Description" content="Using canvas graphics to generate a data URL." />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+    body { font:12px monospace; background: #eee; }
+    div { width:600px; margin:0 auto; border:1px #000 solid; background:#fff; padding:5px; }
+    label:after, dt:after { content:":"; }
+    dt { float:left; width:90px; }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="ddlMethod">Method</label>
+        <select id="ddlMethod">
+            <option>GET</option>
+            <option>POST</option>
+            <option>PUT</option>
+            <option>DELETE</option>
+        </select>
+        <label for="ddlStatusCode">Status Code</label>
+        <select id="ddlStatusCode">
+            <optgroup label="Informational">
+                <option>100</option>
+                <option>101</option>
+            </optgroup>
+            <optgroup label="Success">
+                <option selected="selected">200</option>
+                <option>201</option>
+                <option>202</option>
+                <option>203</option>
+                <option>204</option>
+                <option>205</option>
+                <option>206</option>
+            </optgroup>
+            <optgroup label="Redirection">
+                <option>300</option>
+                <option>301</option>
+                <option>302</option>
+                <option>303</option>
+                <option>304</option>
+                <option>305</option>
+                <option>307</option>
+            </optgroup>
+            <optgroup label="Client Error">
+                <option>400</option>
+                <option>401</option>
+                <option>403</option>
+                <option>404</option>
+                <option>405</option>
+                <option>406</option>
+                <option>407</option>
+                <option>408</option>
+                <option>409</option>
+                <option>410</option>
+                <option>411</option>
+                <option>412</option>
+                <option>413</option>
+                <option>414</option>
+                <option>415</option>
+                <option>416</option>
+                <option>417</option>
+            </optgroup>
+            <optgroup label="Server Error">
+                <option>500</option>
+                <option>501</option>
+                <option>502</option>
+                <option>503</option>
+                <option>504</option>
+                <option>505</option>
+            </optgroup>
+        </select>
+        <br />
+        <br />
+        <input type="button" id="btn" value="Make Request" />
+        <br />
+        <br />
+        <pre id="responseText"></pre>
+    </div>
+    <script src="jquery-1.8.0.min.js"></script>
+    <script type="text/javascript">
+    
+        $(function () {
+            
+            var ddlMethod = $("#ddlMethod"),
+                ddlStatusCode = $("#ddlStatusCode"),
+                responseText = $("#responseText"),
+                setOutput = function (jqXHR) {
+                    responseText.html(jqXHR.responseText);
+                };
+                
+            $("#btn").click(function () {
+                $.ajax({
+                    type: ddlMethod.val(),
+                    url: "index.php",
+                    data: { code: new Number(ddlStatusCode.val()).valueOf() }
+                })
+                .done(function (data, textStatus, jqXHR) {
+                    setOutput(jqXHR);
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    setOutput(jqXHR);
+                });
+            });
+        });
+        
+    </script>
+</body>
+</html>
