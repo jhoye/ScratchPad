@@ -7,78 +7,14 @@
     <link href="styles.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-    <div class="buttons">
-        <a class="block selected">
-            <span><img src="sprites.gif" alt="block" title="block" /></span>
-        </a>
-        <a class="beehive">
-            <span><img src="sprites.gif" alt="beehive" title="beehive" /></span>
-        </a>
-        <a class="loaf">
-            <span><img src="sprites.gif" alt="loaf" title="loaf" /></span>
-        </a>
-        <a class="boat">
-            <span><img src="sprites.gif" alt="boat" title="boat" /></span>
-        </a>
-        <a class="blinker">
-            <span><img src="sprites.gif" alt="blinker" title="blinker" /></span>
-        </a>
-        <a class="toad">
-            <span><img src="sprites.gif" alt="toad" title="toad" /></span>
-        </a>
-        <a class="beacon">
-            <span><img src="sprites.gif" alt="beacon" title="beacon" /></span>
-        </a>
-        <a class="pulsar">
-            <span><img src="sprites.gif" alt="pulsar" title="pulsar" /></span>
-        </a>
-        <a class="glider1">
-            <span><img src="sprites.gif" alt="glider" title="glider &LowerRightArrow;" /></span>
-        </a>
-        <a class="glider2">
-            <span><img src="sprites.gif" alt="glider" title="glider &UpperLeftArrow;" /></span>
-        </a>
-        <a class="glider3">
-            <span><img src="sprites.gif" alt="glider" title="glider &LowerLeftArrow;" /></span>
-        </a>
-        <a class="glider4">
-            <span><img src="sprites.gif" alt="glider" title="glider &UpperRightArrow;" /></span>
-        </a>
-        <a class="lwss1">
-            <span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship &rarr;" /></span>
-        </a>
-        <a class="lwss2">
-            <span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship &larr;" /></span>
-        </a>
-        <a class="lwss3">
-            <span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship &darr;" /></span>
-        </a>
-        <a class="lwss4">
-            <span><img src="sprites.gif" alt="lightweight spaceship" title="lightweight spaceship &uarr;" /></span>
-        </a>
-        <a class="fpentomino">
-            <span><img src="sprites.gif" alt="f-pentamino" title="f-pentamino" /></span>
-        </a>
-        <a class="diehard">
-            <span><img src="sprites.gif" alt="diehard" title="diehard" /></span>
-        </a>
-        <a class="acorn">
-            <span><img src="sprites.gif" alt="acorn" title="acorn" /></span>
-        </a>
-        <a class="glidergun">
-            <span><img src="sprites.gif" alt="" title="" /></span>
-        </a>
-        <a class="infinite1">
-            <span><img src="sprites.gif" alt="infinite1" title="infinite1" /></span>
-        </a>
-        <a class="infinite2">
-            <span><img src="sprites.gif" alt="infinite2" title="infinite2" /></span>
-        </a>
-        <a class="infinite3">
-            <span><img src="sprites.gif" alt="infinite3" title="infinite3" /></span>
-        </a>
-        <br />
-    </div>
+    <p>Click a species to select it:</p>
+    <ul id="buttons" data-bind="foreach: Items">
+        <li data-bind="attr: { title: Name, class: CssClass }">
+            <canvas data-bind="attr: { id: Id, height: Height, width: Width }"></canvas>
+        </li>
+    </ul>
+    <br />
+    <br />
     <p>Click within the square to add life.</p>
     <div>
         <!-- supports only a square universe -->
@@ -130,6 +66,7 @@
         <input id="doomsday" type="button" value="Destroy Everything" />
     </div>
     <script src="jquery-1.8.0.min.js"></script>
+    <script src="knockout-3.2.0.js"></script>
     <script src="life.js"></script>
     <script src="behavior.js"></script>
     <script type="text/javascript">
