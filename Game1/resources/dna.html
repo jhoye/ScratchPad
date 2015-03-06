@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Buttons Prototype</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body { background-color:#eee; font:12px monospace; }
+            ul { display:inline; padding:0; }
+            li { display:inline; }
+            ul#buttons li canvas { padding:4px; }
+            ul#buttons li.selected canvas { cursor:default; background:#fff; }
+            ul#buttons li canvas:hover,
+            ul#buttons li.selected canvas { border:1px #000 solid; padding:3px; cursor:pointer; }
+        </style>
+    </head>
+    <body>
+        <p>This is a prototype of the buttons UI which makes use of the HTML 5 canvas API.</h1>
+        <ul id="buttons" data-bind="foreach: Items">
+            <li data-bind="attr: { title: Name, class: CssClass }">
+                <canvas data-bind="attr: { id: Id, height: Height, width: Width }"></canvas>
+            </li>
+        </ul>
+        <script src="knockout-3.2.0.js"></script>
+        <script type="text/javascript">
+        
+        var i,
+            dna = { Items: ko.observableArray([]) },
+            iterate = function (f) {
+                
+                var i;
+                
+                for (i = 0; i < dna.Items().length; i++) {
+                    f(dna.Items()[i]);
+                }
+            },
+            buttons = document.getElementById("buttons"),
+            scale = 3,
+            dnaItem = function (id, name, coordinates) {
+                
+                var i, x, y,
+                    height = 0,
+                    width = 0;
+                
+                for (i = 0; i < coordinates.length; i++) {
+                    x = coordinates[i].x * scale;
+                    y = coordinates[i].y * scale;
+                    if (y > height) {
+                        height = y;
+                    }
+                    if (x > width) {
+                        width = x;
+                    }
+                }
+                
+                height = height + scale;
+                width = width + scale;
+                
+                this.CssClass = ko.observable("");
+                this.Id = id;
+                this.Name = name;
+                this.Coordinates = coordinates;
+                this.Height = height;
+                this.Width = width;
+                this.RenderCoordinates = function (f) {
+                    
+                    var i,
+                        canvas = document.getElementById(id),
+                        plane = canvas.getContext("2d");
+                    
+                    plane.fillStyle = "#000";
+                
+                    for (i = 0; i < coordinates.length; i++) {
+                        plane.fillRect(coordinates[i].x * scale, coordinates[i].y * scale, scale, scale);
+                    }
+                    
+                    canvas.addEventListener(
+                        "mouseup",
+                        function () {
+                            f(coordinates);
+                        },
+                        false);
+                },
+                this.Select = function () {
+                    this.CssClass("selected");
+                },
+                this.Deselect = function () {
+                    this.CssClass("");
+                };
+            };
+        
+        // build dna items
+        dna.Items.push(
+            new dnaItem(
+                "lwss",
+                "lightweight spaceship",
+                [{x:1, y:0}, {x:4, y:0}, {x:0, y:1}, {x:0, y:2}, {x:4, y:2}, {x:0, y:3}, {x:1, y:3}, {x:2, y:3}, {x:3, y:3}]
+            )
+        );
+        dna.Items.push(
+            new dnaItem(
+                "mwss",
+                "mediumweight spaceship",
+                [{x:3, y:0},{x:1, y:1},{x:5, y:1},{x:0, y:2},{x:0, y:3},{x:5, y:3},{x:0, y:4},{x:1, y:4},{x:2, y:4},{x:3, y:4},{x:4, y:4}]
+            )
+        );
+        dna.Items.push(
+            new dnaItem(
+                "hwss",
+                "heavyweight spaceship",
+                [{x:3, y:0}, {x:4, y:0}, {x:1, y:1}, {x:6, y:1}, {x:0, y:2}, {x:0, y:3}, {x:6, y:3}, {x:0, y:4}, {x:1, y:4}, {x:2, y:4}, {x:3, y:4}, {x:4, y:4}, {x:5, y:4}]
+            )
+        );
+        
+        // bind dna items to buttons UI
+        ko.applyBindings(dna, buttons);
+        
+        // set up UI behavior
+        iterate(function (item) {
+            item.RenderCoordinates(
+                function (coordinates) {
+                    console.dir(coordinates); // TODO: use coordinates in Game of Life application
+                    iterate(function (item) { item.Deselect(); });
+                    item.Select();
+                }
+            );
+        });
+        
+        </script>
+    </body>
+</html>
