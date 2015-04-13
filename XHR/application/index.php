@@ -13,11 +13,10 @@ switch ($method)
         break;
     
     case 'PUT':
-        $code = 200;
-        break;
-    
     case 'DELETE':
-        $code = 200;
+        $fileContents = array();
+        parse_str( file_get_contents( 'php://input' ), $fileContents );
+        $code = $fileContents['code'] == '' ? 200 : intval($fileContents['code']);
         break;
     
     default:
