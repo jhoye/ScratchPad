@@ -1,0 +1,40 @@
+﻿@model Scratch.Web.Models.ViewModelBase
+
+@{
+    Layout = null;
+
+    var title = ViewBag.Title;
+    var bodyCssClass = String.IsNullOrEmpty(ViewBag.BodyCssClass) ? "website-admin" : ViewBag.BodyCssClass;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <meta name="viewport" content="width=device-width"/>
+    
+    <title>@title</title>
+    
+@if (Model.ShowToolbar)
+{
+    <link href="~/Content/toolbar.css" rel="stylesheet" type="text/css"/>
+}
+
+    @RenderSection("Head", false)
+
+</head>
+<body class="@bodyCssClass">
+    <div id="container">
+        @RenderBody()
+    </div>
+
+@if (Model.ShowToolbar)
+{
+    @Html.Partial("_Toolbar", Model)
+}
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>

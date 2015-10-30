@@ -1,0 +1,50 @@
+﻿#toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-bottom: 1px #888888 solid;
+    border-right: 1px #888888 solid;
+    background: #ffffff;
+    font: 13px monospace;
+    display: table;
+    -webkit-box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
+}
+#toolbar ul.menu,
+#toolbar-pane {
+    display: table-cell;
+    margin: 0;
+    padding: 0;
+    border-left: 1px #e0e0e0 solid;
+}
+#toolbar ul.menu li {
+    list-style: none;
+}
+#toolbar ul.menu a {
+    display: block;
+    height: 20px;
+    padding: 10px 10px 6px 10px;
+    border-top: 1px #ffffff solid;
+    border-bottom: 1px #ffffff solid;
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+}
+#toolbar ul.menu a.active,
+#toolbar ul.menu a:hover {
+    background: #f8f8f8;
+    border-top: 1px #ededed solid;
+    border-bottom: 1px #e8e8e8 solid;
+}
+#toolbar ul.menu img {
+    margin: 0 0 -4px 0;
+}
+#toolbar ul.menu span {
+    display: none;
+}
+/**********/
+body.website-admin #container {
+    margin: 0 0 0 100px;
+    font: 13px monospace;
+}

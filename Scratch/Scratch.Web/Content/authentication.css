@@ -1,0 +1,16 @@
+﻿body.authentication #container {
+    width: 500px;
+    margin: 0 auto;
+    font: 13px monospace;
+}
+
+body.authentication h1,
+body.authentication form div,
+body.authentication p {
+    margin: 10px;
+    text-align: center;
+}
+
+body.authentication label:after {
+    content: ":";
+}
