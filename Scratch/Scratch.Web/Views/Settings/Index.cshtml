@@ -1,8 +1,115 @@
-﻿
+﻿@using Scratch.Web.Models.Settings
+
+@model IndexViewModel
+
 @{
     ViewBag.Title = "Website Settings";
     
     Layout = "~/Views/Shared/_WebsiteAdminLayout.cshtml";
 }
 
+@section Head
+{
+    <link href="/Content/settings.css" rel="stylesheet" type="text/css" />
+}
+
+@helper Render(SettingsBase settings)
+{
+    var settingsType = settings.GetType();
+
+    var dataUrl = settingsType == typeof(CacheSettings)
+     ? Url.Action("Cache")
+     : settingsType == typeof(DatabaseSettings)
+        ? Url.Action("Database")
+        : settingsType == typeof(EmailSettings)
+            ? Url.Action("Email")
+            : string.Empty;
+
+    <tr data-url="@dataUrl">
+        <td class="andon">
+            @switch (settings.Status)
+            {
+                case SettingsBase.Statuses.None:
+                    <img src="~/Content/fugue/status-offline.png" alt="no status" />
+                    break;
+                case SettingsBase.Statuses.Green:
+                <img src="~/Content/fugue/status.png" alt="system is running well" />
+                    break;
+                case SettingsBase.Statuses.Yellow:
+                <img src="~/Content/fugue/status-away.png" alt="attention is needed on this system" />
+                    break;
+                case SettingsBase.Statuses.Red:
+                <img src="~/Content/fugue/status-busy.png" alt="system is not running" />
+                    break;
+            }
+        </td>
+        <td class="name">@settings.Name</td>
+        <td><div class="actions"></div></td>
+        <td class="status-message">@settings.StatusMessage</td>
+    </tr>
+}
+
 <h1>Website Settings</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>&nbsp;</th>
+        <th>Name</th>
+        <th>&nbsp;</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var settings in Model.Settings)
+    {
+        @Render(settings)
+    }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            $("tbody > tr").each(function() {
+
+                var tr = $(this),
+                    url = tr.attr("data-url"),
+                    load = function() {
+                        tr.find("div.actions").html('<img src="/Content/i_loading.gif" alt="loading..." />');
+                        tr.load(url, function() {
+
+                            var reload = tr.find("a.reload"),
+                                edit = tr.find("a.edit"),
+                                form = tr.find("form"),
+                                save = tr.find("input.save"),
+                                cancel = tr.find("input.cancel");
+
+                            reload.click(function() {
+                                load();
+                                return false;
+                            });
+
+                            edit.click(function () {
+                                edit.hide();
+                                form.show();
+                                return false;
+                            });
+
+                            save.click(function () {
+                                console.log("save...");
+                            });
+
+                            cancel.click(function () {
+                                form.hide();
+                                edit.show();
+                            });
+                        });
+                    };
+
+                load();
+            });
+        });
+    </script>
+}

@@ -1,0 +1,42 @@
+﻿@using Scratch.Web.Models.Settings
+
+@model SettingsBase
+
+@{
+    Layout = null;
+}
+
+<td class="andon">
+    @switch (Model.Status)
+    {
+        case SettingsBase.Statuses.None:
+            <img src="~/Content/fugue/status-offline.png" alt="no status" />
+            break;
+        case SettingsBase.Statuses.Green:
+        <img src="~/Content/fugue/status.png" alt="system is running well" />
+            break;
+        case SettingsBase.Statuses.Yellow:
+        <img src="~/Content/fugue/status-away.png" alt="attention is needed on this system" />
+            break;
+        case SettingsBase.Statuses.Red:
+        <img src="~/Content/fugue/status-busy.png" alt="system is not running" />
+            break;
+    }
+</td>
+<td class="name">@Model.Name</td>
+<td>
+    <div class="actions">
+        <a href="#" class="reload"><img src="~/Content/fugue/arrow-circle-double.png" alt="reload" title="reload" /></a>
+        <a href="#" class="edit"><img src="~/Content/fugue/pencil.png" alt="edit" title="edit" /></a>
+    </div>
+</td>
+<td class="status-message">
+    <p>@Model.StatusMessage</p>
+    <form>
+        @RenderSection("Form")
+        <div>
+            <input class="save" type="button" value="Save"/>
+            <input class="cancel" type="reset" value="Cancel" />
+        </div>
+    </form>
+</td>

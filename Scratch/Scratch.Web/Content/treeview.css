@@ -1,0 +1,137 @@
+﻿#tree {
+    border-top:1px #000000 solid;
+}
+
+#tree ul.tree {
+    padding: 0;
+    margin: 0;
+}
+
+#tree li.tree {
+    list-style: none;
+    display: table;
+    padding: 0 0 5px 0;
+    background: transparent url('treeview_sprite.png') repeat-y -64px 0;
+}
+
+#tree li.tree:last-child {
+    background-image: none;
+}
+
+#tree li.tree section {
+    display: table-cell;
+    vertical-align: top;
+}
+
+#tree li.tree section.tree-lines {
+    width: 16px;
+    background: transparent url('treeview_sprite.png') no-repeat -48px 0;
+}
+
+#tree li.tree:last-child section.tree-lines {
+    background-position: -32px 0;
+}
+
+#tree li.tree section.tree-lines span.toggle {
+    display: none;
+}
+
+#tree li.tree section.tree-lines span.toggle-plus,
+#tree li.tree section.tree-lines span.toggle-minus {
+    width: 16px;
+    height: 16px;
+    display: block;
+    background: transparent url('treeview_sprite.png') no-repeat 0 0;
+    cursor: pointer;
+}
+
+#tree li.tree section.tree-lines span.toggle-minus {
+    background-position:-16px 0;
+}
+
+#tree li.tree section.tree-item header {
+    background: transparent no-repeat 0 0;
+    padding-left: 20px;
+    height: 16px;
+}
+
+#tree li.tree section.tree-item header.tree-inbox {
+    background-image: url('fugue/inbox.png');
+}
+
+#tree li.tree section.tree-item header.tree-lists {
+    background-image: url('fugue/document-list.png');
+}
+
+#tree li.tree section.tree-item header.tree-calendar {
+    background-image: url('fugue/calendar-month.png');
+}
+
+#tree li.tree section.tree-item header.tree-reference-materials {
+    background-image: url('fugue/books-stack.png');
+}
+
+#tree li.tree section.tree-item header.tree-tickler-files {
+    background-image: url('fugue/folders-stack.png');
+}
+
+#tree li.tree section.tree-item header.tree-todays-schedule {
+    background-image: url('fugue/calendar-select.png');
+}
+
+#tree li.tree section.tree-item header.tree-todays-tickler {
+    background-image: url('fugue/folder.png');
+}
+
+#tree li.tree section.tree-item header.tree-purchase-orders {
+    background-image: url('fugue/receipts.png');
+}
+
+#tree li.tree section.tree-item header.tree-form-submissions {
+    background-image: url('fugue/application-form.png');
+}
+
+#tree li.tree section.tree-item header.tree-blog-comments {
+    background-image: url('fugue/balloon.png');
+}
+
+#tree li.tree section.tree-item header.tree-ideas {
+    background-image: url('fugue/light-bulb-off.png');
+}
+
+
+#tree li.tree section.tree-item header.tree-projects {
+    background-image: url('fugue/blueprint.png');
+}
+
+#tree li.tree section.tree-item header.tree-next-actions {
+    background-image: url('fugue/control.png');
+}
+
+#tree li.tree section.tree-item header.tree-waiting-for {
+    background-image: url('fugue/control-pause.png');
+}
+
+#tree li.tree section.tree-item header.tree-someday-maybe {
+    background-image: url('fugue/control-double.png');
+}
+
+#tree li.tree section.tree-item header.tree-at-computer {
+    background-image: url('fugue/monitor.png');
+}
+
+#tree li.tree section.tree-item header.tree-away-from-computer {
+    background-image: url('fugue/monitor-off.png');
+}
+
+#tree li.tree section.tree-item header.tree-errands {
+    background-image: url('fugue/traffic-light.png');
+}
+
+#tree li.tree section.tree-item header.tree-calls {
+    background-image: url('fugue/mobile-phone.png');
+}
+
+#tree li.tree section.tree-item header.tree-agendas {
+    background-image: url('fugue/user-silhouette.png');
+}

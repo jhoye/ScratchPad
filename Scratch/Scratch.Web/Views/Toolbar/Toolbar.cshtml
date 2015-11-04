@@ -1,0 +1,61 @@
+﻿@using Scratch.Web.Models.Toolbar
+
+@model ToolbarViewModel
+
+@{
+    Layout = null;
+
+    const string activeAttr = " class=active";
+    
+    var active1 = string.Empty;
+    var active2 = string.Empty;
+    
+    switch (Model.ActiveMenuItem)
+    {
+        case ToolbarViewModel.MenuItems.PageEditing:
+            active1 = activeAttr;
+            break;
+            
+        case ToolbarViewModel.MenuItems.WebsiteAdmin:
+            active2 = activeAttr;
+            break;
+    }
+}
+
+<div id="toolbar">
+    <ul>
+        <li>
+            <a @active1 data-action="">
+                <img alt="Page Editing" title="Page Editing" src="~/Content/fugue/document.png"/>
+                <span>Page Editing</span>
+            </a>
+        </li>
+        <li>
+            <a @active2 data-action="">
+                <img alt="Admin" title="Admin" src="~/Content/fugue/gear.png" />
+                <span>Website Admin</span>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Logout", "Page")">
+                <img alt="Log Out" title="Log Out" src="~/Content/fugue/lock.png"/>
+                <span>Log Out</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        var toolbar = $("#toolbar"),
+            spans = toolbar.find("span");
+
+        toolbar.mouseover(function() {
+            spans.show();
+        }).mouseout(function() {
+            spans.hide();
+        });
+    });
+</script>

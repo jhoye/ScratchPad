@@ -1,133 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HTML5 Canvas and Data URLs </title>
-    <meta name="Description" content="Using canvas graphics to generate a data URL." />
+    <title>Graphics Demos</title>
+    <meta name="Description" content="Graphics Demonstrations" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style type="text/css">
     body { font:12px monospace; background: #eee; }
-    div { width:607px; margin:0 auto; }
-    .grid, .image { display:block; height:300px; width:300px; float:left; margin:0 5px 5px 0; }
-    .grid { border-left: 1px #bbb solid; border-top: 1px #bbb solid; background:#fff url(data:image/gif;base64,R0lGODlhFAAUAIAAAMDAwP///yH5BAEAAAEALAAAAAAUABQAAAImhI+pwe3vAJxQ0hssnnq/7jVgmJGfGaGiyoyh68GbjNGXTeEcGxQAOw==) -1px -1px; }
-    .image { margin:1px 0 0 0; }
-    textarea { border: 1px #000 solid; height:150px; width:600px; display:block; margin:0 0 5px 0; }
-    br { clear: left; }
     </style>
 </head>
 <body>
-    <div>
-        <span class="grid">
-            <canvas id="graphics" width="300" height="300"></canvas>
-        </span>
-        <span class="image">
-            <img id="output" alt="output image" src="data:text/plain," />
-        </span>
-        <br />
-        <label for="dataText" id="dataTextLabel"></label>
-        <textarea id="dataText" cols="1" rows="1"></textarea>
-        <textarea id="coordinatesText" cols="1" rows="1"></textarea>
-    </div>
-    <script src="jquery-1.8.0.min.js"></script>
-    <script src="json.js"></script>
-    <script type="text/javascript">
-    
-        $(function () {
-            
-            var scale = 20,
-                graphics = document.getElementById("graphics"),
-                dataText = document.getElementById("dataText"),
-                coordinatesText = document.getElementById("coordinatesText"),
-                output = document.getElementById("output"),
-                dataTextLabel = document.getElementById("dataTextLabel"),
-                plane = graphics.getContext("2d"),
-                generateDataUrl = function () {
-                    
-                    // canvas function
-                    var dataUrl = graphics.toDataURL("image/png"),
-                        filled = coordinates.getFilled();
-                    
-                    // output
-                    dataText.innerHTML = dataUrl;
-                    dataTextLabel.innerHTML = dataUrl.length + " bytes:";
-                    output.src = dataUrl;
-                    console.dir(filled);
-                    try {
-                        coordinatesText.innerHTML = uneval(filled);
-                    } catch (e) {
-                        coordinatesText.innerHTML = JSON.stringify(filled);
-                    }
-                },
-                coordinates = (function () {
-                    
-                    var w = new Number(graphics.attributes["width"].value).valueOf(),
-                        m = (w - w % scale) / scale,
-                        grid = [],
-                        gx, ix, iy;
-                    
-                    for (iy = 0; iy < m; iy++) {
-                        gx = [];
-                        for (ix = 0; ix < m; ix++) {
-                            gx.push({
-                                isFilled: false,
-                                x: ix,
-                                y: iy
-                            });
-                        }
-                        grid.push(gx);
-                    }
-                    
-                    return {
-                        fill: function (x, y) {
-                            grid[y / scale][x / scale].isFilled = true;
-                        },
-                        clear: function (x, y) {
-                            grid[y / scale][x / scale].isFilled = false;
-                        },
-                        getFilled: function () {
-                            
-                            var filled = [];
-                            
-                            for (iy = 0; iy < m; iy++) {
-                                for (ix = 0; ix < m; ix++) {
-                                    if (grid[iy][ix].isFilled === true) {
-                                        filled.push({ x: ix, y: iy });
-                                    }
-                                }
-                            }
-                            
-                            return filled;
-                        }
-                    };
-                })();
-                
-            plane.fillStyle = "#000";
-            generateDataUrl();
-                
-            $("#graphics").mouseup(function (e) {
-                
-                var offset = $(this).offset(),
-                    x = e.clientX - offset.left,
-                    y = e.clientY - offset.top,
-                    pixelData = plane.getImageData(x, y, 1, 1).data;
-                    
-                // offset x and y based on scale
-                x = x - (x % scale);
-                y = y - (y % scale)
-                    
-                // fill or clear square graphics
-                if (pixelData[3] === 0 || pixelData[0] !== 0)
-                {
-                    plane.fillRect(x, y, scale, scale);
-                    coordinates.fill(x, y);
-                } else {
-                    plane.clearRect(x - (x % scale), y - (y % scale), scale, scale);
-                    coordinates.clear(x, y);
-                }
-                
-                generateDataUrl();
-            });
-        });
-        
-    </script>
+    <header>
+        <h1>Graphics Demos</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="./html5_canvas_and_data_urls.html">HTML5 Canvas and Data URLs</a></li>
+            <li><a href="./svg_images.html">SVG Images</a></li>
+        </ul>
+    </nav>
 </body>
 </html>

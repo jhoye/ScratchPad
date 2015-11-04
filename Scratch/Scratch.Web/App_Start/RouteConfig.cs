@@ -20,7 +20,17 @@ namespace Scratch.Web
                 "Admin/{controller}/{action}/{id}", 
                 new
                 {
-                    controller = "Settings",
+                    controller = "Admin",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                });
+
+            routes.MapRoute(
+                "Treeview",
+                "Treeview/{action}/{id}",
+                new
+                {
+                    controller = "Treeview",
                     action = "Index",
                     id = UrlParameter.Optional
                 });

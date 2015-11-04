@@ -12,7 +12,7 @@ namespace Scratch.Web.Models.Authentication
 
         public string ReturnUrl { get; set; }
 
-        public LoginViewModel() : base(false)
+        public LoginViewModel() : base(MenuItems.None, false)
         {
         }
     }

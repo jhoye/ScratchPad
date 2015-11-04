@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style type="text/css">
+        #container {
+            width: 500px;
+            margin: 0 auto;
+            font: 13px monospace;
+        }
+
+        h1, form div, p {
+            margin: 10px;
+            text-align: center;
+        }
+
+        label:after {
+            content: ":";
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <h1>@ViewBag.Title</h1>
+    @RenderBody()
+</div>
+</body>
+</html>

@@ -4,7 +4,7 @@
     {
         public string Slug { get; set; }
 
-        public PageViewModel(bool showToolbar = false) : base(showToolbar, MenuItems.PageEditing)
+        public PageViewModel(bool showToolbar = false) : base(MenuItems.PageEditing, showToolbar)
         {
         }
     }

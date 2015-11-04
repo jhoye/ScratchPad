@@ -1,0 +1,152 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Toolbar</title>
+    <style type="text/css">
+        body {
+            background: #dddddd;
+            margin: 0;
+        }
+         #container {
+             width: 800px;
+             background: #eeeeee;
+             padding: 10px;
+             margin: 0 auto;
+         }
+        #container p {
+            font: 13px Verdana;
+        }
+    </style>
+    <style type="text/css">
+        #toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-bottom: 1px #888888 solid;
+            border-right: 1px #888888 solid;
+            background: #ffffff;
+            font: 13px monospace;
+            display: table;
+            -webkit-box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
+            -moz-box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
+            box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
+        }
+        #toolbar ul {
+            display: table-cell;
+            margin: 0;
+            padding: 0;
+            border-left: 1px #e0e0e0 solid;
+        }
+        #toolbar li {
+            list-style: none;
+            height: 20px;
+            padding: 10px 10px 6px 10px;
+            border-top: 1px #ffffff solid;
+            border-bottom: 1px #ffffff solid;
+        }
+        #toolbar li.active,
+        #toolbar li:hover {
+            background: #f8f8f8;
+            border-top: 1px #ededed solid;
+            border-bottom: 1px #e8e8e8 solid;
+            cursor: pointer;
+        }
+        #toolbar img {
+            margin: 0 0 -4px 0;
+        }
+        #toolbar span {
+            margin: 0 0 0 10px;
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+</head>
+<body>
+    <div id="container">
+        <p>Bacon ipsum dolor amet flank tenderloin turducken cupim, ground round meatball tri-tip chuck spare ribs beef ribs bresaola sausage beef. Chuck turducken leberkas pig doner tongue short loin picanha. Boudin beef pork chop, doner venison cow tail bacon. Shankle short loin ribeye, cow short ribs venison rump. Strip steak sirloin salami tenderloin, jerky corned beef filet mignon biltong pastrami turducken. Tongue biltong sirloin filet mignon doner, rump alcatra corned beef beef ribs boudin. Shoulder landjaeger kevin, beef ribs brisket swine fatback chicken doner prosciutto.</p>
+        <p>Pork loin short ribs brisket doner ball tip, pork belly hamburger spare ribs picanha jowl strip steak ham flank cupim. Rump jerky beef ribs doner. Drumstick frankfurter short ribs pig, kielbasa short loin strip steak pork chop. Meatball swine tail ball tip tongue biltong pork loin picanha turkey sausage andouille filet mignon.</p>
+        <p>Cupim landjaeger ball tip, turkey bresaola ham filet mignon. Fatback rump bacon jerky. Pancetta t-bone cow salami flank. T-bone strip steak tenderloin jerky rump pastrami shankle chuck hamburger, fatback boudin kevin meatball. Beef ribs fatback pastrami, flank kevin pork andouille filet mignon pancetta kielbasa shoulder meatball bresaola cow. Capicola alcatra chuck bacon, shankle spare ribs pork loin flank t-bone pastrami short ribs short loin biltong ribeye venison. Sausage bresaola beef, landjaeger kevin rump pancetta chicken sirloin porchetta.</p>
+        <p>Bacon ipsum dolor amet flank tenderloin turducken cupim, ground round meatball tri-tip chuck spare ribs beef ribs bresaola sausage beef. Chuck turducken leberkas pig doner tongue short loin picanha. Boudin beef pork chop, doner venison cow tail bacon. Shankle short loin ribeye, cow short ribs venison rump. Strip steak sirloin salami tenderloin, jerky corned beef filet mignon biltong pastrami turducken. Tongue biltong sirloin filet mignon doner, rump alcatra corned beef beef ribs boudin. Shoulder landjaeger kevin, beef ribs brisket swine fatback chicken doner prosciutto.</p>
+        <p>Pork loin short ribs brisket doner ball tip, pork belly hamburger spare ribs picanha jowl strip steak ham flank cupim. Rump jerky beef ribs doner. Drumstick frankfurter short ribs pig, kielbasa short loin strip steak pork chop. Meatball swine tail ball tip tongue biltong pork loin picanha turkey sausage andouille filet mignon.</p>
+        <p>Cupim landjaeger ball tip, turkey bresaola ham filet mignon. Fatback rump bacon jerky. Pancetta t-bone cow salami flank. T-bone strip steak tenderloin jerky rump pastrami shankle chuck hamburger, fatback boudin kevin meatball. Beef ribs fatback pastrami, flank kevin pork andouille filet mignon pancetta kielbasa shoulder meatball bresaola cow. Capicola alcatra chuck bacon, shankle spare ribs pork loin flank t-bone pastrami short ribs short loin biltong ribeye venison. Sausage bresaola beef, landjaeger kevin rump pancetta chicken sirloin porchetta.</p>
+        <p>Bacon ipsum dolor amet flank tenderloin turducken cupim, ground round meatball tri-tip chuck spare ribs beef ribs bresaola sausage beef. Chuck turducken leberkas pig doner tongue short loin picanha. Boudin beef pork chop, doner venison cow tail bacon. Shankle short loin ribeye, cow short ribs venison rump. Strip steak sirloin salami tenderloin, jerky corned beef filet mignon biltong pastrami turducken. Tongue biltong sirloin filet mignon doner, rump alcatra corned beef beef ribs boudin. Shoulder landjaeger kevin, beef ribs brisket swine fatback chicken doner prosciutto.</p>
+        <p>Pork loin short ribs brisket doner ball tip, pork belly hamburger spare ribs picanha jowl strip steak ham flank cupim. Rump jerky beef ribs doner. Drumstick frankfurter short ribs pig, kielbasa short loin strip steak pork chop. Meatball swine tail ball tip tongue biltong pork loin picanha turkey sausage andouille filet mignon.</p>
+        <p>Cupim landjaeger ball tip, turkey bresaola ham filet mignon. Fatback rump bacon jerky. Pancetta t-bone cow salami flank. T-bone strip steak tenderloin jerky rump pastrami shankle chuck hamburger, fatback boudin kevin meatball. Beef ribs fatback pastrami, flank kevin pork andouille filet mignon pancetta kielbasa shoulder meatball bresaola cow. Capicola alcatra chuck bacon, shankle spare ribs pork loin flank t-bone pastrami short ribs short loin biltong ribeye venison. Sausage bresaola beef, landjaeger kevin rump pancetta chicken sirloin porchetta.</p>
+        <p>Bacon ipsum dolor amet flank tenderloin turducken cupim, ground round meatball tri-tip chuck spare ribs beef ribs bresaola sausage beef. Chuck turducken leberkas pig doner tongue short loin picanha. Boudin beef pork chop, doner venison cow tail bacon. Shankle short loin ribeye, cow short ribs venison rump. Strip steak sirloin salami tenderloin, jerky corned beef filet mignon biltong pastrami turducken. Tongue biltong sirloin filet mignon doner, rump alcatra corned beef beef ribs boudin. Shoulder landjaeger kevin, beef ribs brisket swine fatback chicken doner prosciutto.</p>
+        <p>Pork loin short ribs brisket doner ball tip, pork belly hamburger spare ribs picanha jowl strip steak ham flank cupim. Rump jerky beef ribs doner. Drumstick frankfurter short ribs pig, kielbasa short loin strip steak pork chop. Meatball swine tail ball tip tongue biltong pork loin picanha turkey sausage andouille filet mignon.</p>
+        <p>Cupim landjaeger ball tip, turkey bresaola ham filet mignon. Fatback rump bacon jerky. Pancetta t-bone cow salami flank. T-bone strip steak tenderloin jerky rump pastrami shankle chuck hamburger, fatback boudin kevin meatball. Beef ribs fatback pastrami, flank kevin pork andouille filet mignon pancetta kielbasa shoulder meatball bresaola cow. Capicola alcatra chuck bacon, shankle spare ribs pork loin flank t-bone pastrami short ribs short loin biltong ribeye venison. Sausage bresaola beef, landjaeger kevin rump pancetta chicken sirloin porchetta.</p>
+        <p>Bacon ipsum dolor amet flank tenderloin turducken cupim, ground round meatball tri-tip chuck spare ribs beef ribs bresaola sausage beef. Chuck turducken leberkas pig doner tongue short loin picanha. Boudin beef pork chop, doner venison cow tail bacon. Shankle short loin ribeye, cow short ribs venison rump. Strip steak sirloin salami tenderloin, jerky corned beef filet mignon biltong pastrami turducken. Tongue biltong sirloin filet mignon doner, rump alcatra corned beef beef ribs boudin. Shoulder landjaeger kevin, beef ribs brisket swine fatback chicken doner prosciutto.</p>
+        <p>Pork loin short ribs brisket doner ball tip, pork belly hamburger spare ribs picanha jowl strip steak ham flank cupim. Rump jerky beef ribs doner. Drumstick frankfurter short ribs pig, kielbasa short loin strip steak pork chop. Meatball swine tail ball tip tongue biltong pork loin picanha turkey sausage andouille filet mignon.</p>
+        <p>Cupim landjaeger ball tip, turkey bresaola ham filet mignon. Fatback rump bacon jerky. Pancetta t-bone cow salami flank. T-bone strip steak tenderloin jerky rump pastrami shankle chuck hamburger, fatback boudin kevin meatball. Beef ribs fatback pastrami, flank kevin pork andouille filet mignon pancetta kielbasa shoulder meatball bresaola cow. Capicola alcatra chuck bacon, shankle spare ribs pork loin flank t-bone pastrami short ribs short loin biltong ribeye venison. Sausage bresaola beef, landjaeger kevin rump pancetta chicken sirloin porchetta.</p>
+        <p>Bacon ipsum dolor amet flank tenderloin turducken cupim, ground round meatball tri-tip chuck spare ribs beef ribs bresaola sausage beef. Chuck turducken leberkas pig doner tongue short loin picanha. Boudin beef pork chop, doner venison cow tail bacon. Shankle short loin ribeye, cow short ribs venison rump. Strip steak sirloin salami tenderloin, jerky corned beef filet mignon biltong pastrami turducken. Tongue biltong sirloin filet mignon doner, rump alcatra corned beef beef ribs boudin. Shoulder landjaeger kevin, beef ribs brisket swine fatback chicken doner prosciutto.</p>
+        <p>Pork loin short ribs brisket doner ball tip, pork belly hamburger spare ribs picanha jowl strip steak ham flank cupim. Rump jerky beef ribs doner. Drumstick frankfurter short ribs pig, kielbasa short loin strip steak pork chop. Meatball swine tail ball tip tongue biltong pork loin picanha turkey sausage andouille filet mignon.</p>
+        <p>Cupim landjaeger ball tip, turkey bresaola ham filet mignon. Fatback rump bacon jerky. Pancetta t-bone cow salami flank. T-bone strip steak tenderloin jerky rump pastrami shankle chuck hamburger, fatback boudin kevin meatball. Beef ribs fatback pastrami, flank kevin pork andouille filet mignon pancetta kielbasa shoulder meatball bresaola cow. Capicola alcatra chuck bacon, shankle spare ribs pork loin flank t-bone pastrami short ribs short loin biltong ribeye venison. Sausage bresaola beef, landjaeger kevin rump pancetta chicken sirloin porchetta.</p>
+        <p>Bacon ipsum dolor amet flank tenderloin turducken cupim, ground round meatball tri-tip chuck spare ribs beef ribs bresaola sausage beef. Chuck turducken leberkas pig doner tongue short loin picanha. Boudin beef pork chop, doner venison cow tail bacon. Shankle short loin ribeye, cow short ribs venison rump. Strip steak sirloin salami tenderloin, jerky corned beef filet mignon biltong pastrami turducken. Tongue biltong sirloin filet mignon doner, rump alcatra corned beef beef ribs boudin. Shoulder landjaeger kevin, beef ribs brisket swine fatback chicken doner prosciutto.</p>
+        <p>Pork loin short ribs brisket doner ball tip, pork belly hamburger spare ribs picanha jowl strip steak ham flank cupim. Rump jerky beef ribs doner. Drumstick frankfurter short ribs pig, kielbasa short loin strip steak pork chop. Meatball swine tail ball tip tongue biltong pork loin picanha turkey sausage andouille filet mignon.</p>
+        <p>Cupim landjaeger ball tip, turkey bresaola ham filet mignon. Fatback rump bacon jerky. Pancetta t-bone cow salami flank. T-bone strip steak tenderloin jerky rump pastrami shankle chuck hamburger, fatback boudin kevin meatball. Beef ribs fatback pastrami, flank kevin pork andouille filet mignon pancetta kielbasa shoulder meatball bresaola cow. Capicola alcatra chuck bacon, shankle spare ribs pork loin flank t-bone pastrami short ribs short loin biltong ribeye venison. Sausage bresaola beef, landjaeger kevin rump pancetta chicken sirloin porchetta.</p>
+    </div>
+<div id="toolbar">
+    <ul>
+        <li data-action=""><img alt="Page Editing" title="Page Editing" src="~/Content/fugue/document.png" /><span>Page Editing</span></li>
+        <li data-action="" class="active"><img alt="Admin" title="Admin" src="~/Content/fugue/gear.png" /><span>Website Admin</span></li>
+        <li data-action=""><img alt="Log Out" title="Log Out" src="~/Content/fugue/lock.png" /><span>Log Out</span></li>
+        @*<li data-action=""><img alt="Admin" title="Admin" src="~/Content/fugue/ruler--pencil.png" /><span>Admin</span></li>
+        <li data-action=""><img alt="Admin" title="Admin" src="~/Content/fugue/switch.png" /><span>Admin</span></li>
+        <li data-action=""><img alt="Admin" title="Admin" src="~/Content/fugue/toolbox.png" /><span>Admin</span></li>
+        <li data-action=""><img alt="Admin" title="Admin" src="~/Content/fugue/wand.png" /><span>Admin</span></li>
+        <li data-action=""><img alt="Admin" title="Admin" src="~/Content/fugue/wrench-screwdriver.png" /><span>Admin</span></li>*@
+    </ul>
+    <ul><!-- Administration -->
+        <li data-action=""><img alt="Edit Content Palette" title="Content Palette" src="~/Content/fugue/palette.png"/><span>Edit Content Palette</span></li>
+        <li data-action=""><img alt="Add Page" title="Add Page" src="~/Content/fugue/document--plus.png"/><span>Add Page</span></li>
+        <li data-action=""><img alt="Delete Page" title="Delete Page" src="~/Content/fugue/document--minus.png"/><span>Delete Page</span></li>
+        <li data-action=""><img alt="Site Navigation" title="Site Navigation" src="~/Content/fugue/compass.png"/><span>Site Navigation</span></li>
+        <li data-action=""><img alt="Site Search" title="Site Search" src="~/Content/fugue/magnifier-left.png"/><span>Site Search</span></li>
+        <li data-action=""><img alt="Web Forms" title="Web Forms" src="~/Content/fugue/application-form.png"/><span>Web Forms</span></li>
+        <li data-action=""><img alt="Store" title="Store" src="~/Content/fugue/barcode.png"/><span>Store</span></li>
+        <li data-action=""><img alt="Syndicated Content" title="Syndicated Content" src="~/Content/fugue/feed.png"/><span>Syndicated Content</span></li>
+        <li data-action=""><img alt="File Manager" title="File Manager" src="~/Content/fugue/folder-open-image.png"/><span>File Manager</span></li>
+        <li data-action=""><img alt="Website Analytics" title="Website Analytics" src="~/Content/fugue/system-monitor.png"/><span>Website Analytics</span></li>
+        <li data-action=""><img alt="Website Settings" title="Website Settings" src="~/Content/fugue/equalizer.png"/><span>Website Settings</span></li>
+        <li data-action=""><img alt="User Profiles" title="User Profiles" src="~/Content/fugue/user-silhouette.png"/><span>User Profiles</span></li>
+        <li data-action=""><img alt="Idea Collector" title="Idea Collector" src="~/Content/fugue/light-bulb-off.png"/><span>Idea Collector</span></li>
+        <li data-action=""><img alt="GTD Treeview" title="GTD Treeview" src="~/Content/fugue/lightning.png"/><span>GTD Treeview</span></li>
+        <!-- Page Editing
+        <li data-action=""><img alt="Save Changes" title="Save Changes" src="~/Content/fugue/disk-black.png"/><span>Save Changes</span></li>
+        <li data-action=""><img alt="Content Palette" title="Content Palette" src="~/Content/fugue/palette.png"/><span>Content Palette</span></li>
+        <li data-action=""><img alt="Edit Page" title="Edit Page" src="~/Content/fugue/document--pencil.png"/><span>Edit Page</span></li>
+        <li data-action=""><img alt="Add Page" title="Add Page" src="~/Content/fugue/document--plus.png"/><span>Add Page</span></li>
+        <li data-action=""><img alt="Delete Page" title="Delete Page" src="~/Content/fugue/document--minus.png"/><span>Delete Page</span></li>
+        <li data-action=""><img alt="Site Navigation" title="Site Navigation" src="~/Content/fugue/compass.png"/><span>Site Navigation</span></li>
+        <li data-action=""><img alt="File Manager" title="File Manager" src="~/Content/fugue/folder-open-image.png"/><span>File Manager</span></li>
+        <li data-action=""><img alt="Webpage Analytics" title="Webpage Analytics" src="~/Content/fugue/system-monitor.png"/><span>Webpage Analytics</span></li>
+        <li data-action=""><img alt="Idea Collector" title="Idea Collector" src="~/Content/fugue/light-bulb-off.png"/><span>Idea Collector</span></li>
+        <li data-action=""><img alt="GTD Treeview" title="GTD Treeview" src="~/Content/fugue/lightning.png"/><span>GTD Treeview</span></li>
+        -->
+    </ul>
+</div>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    @*<script src="//code.jquery.com/jquery-1.10.2.js"></script>*@
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        var toolbar = $("#toolbar"),
+            spans = toolbar.find("span");
+
+        toolbar.mouseover(function() {
+            spans.show();
+        }).mouseout(function() {
+            spans.hide();
+        });
+    });
+</script>
+</body>
+</html>

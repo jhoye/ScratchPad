@@ -1,0 +1,43 @@
+﻿table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+
+th {
+    border-bottom: 1px #888888 solid;
+}
+
+td {
+    border-bottom: 1px #e0e0e0 solid;
+}
+
+th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 10px 10px 10px 0;
+}
+
+td.andon {
+    height: 16px;
+    width: 16px;
+}
+
+td.name {
+    font-weight: bold;
+}
+
+div.actions {
+    width: 40px;
+}
+
+td.status-message {
+    width: 100%;
+}
+
+td.status-message p {
+    margin: 0 0 10px 0;
+}
+form {
+    display: none;
+}

@@ -1,0 +1,17 @@
+﻿@model Scratch.Web.Models.LogoutViewModel
+
+@{
+    ViewBag.Title = "Logout";
+
+    Layout = "_LoginLayout.cshtml";
+}
+
+@{
+    var location = String.IsNullOrWhiteSpace(Model.ReturnUrl) ? "/" : Model.ReturnUrl;
+}
+
+<p>You're logged out now.</p>
+<p>
+    <a href="@location"><img src="~/Content/i_loading.gif" alt="Click here if you're not redirected." title="Click here if you're not redirected." /></a>
+</p>
+<script type="text/javascript">setTimeout(function () { location = "@location"; }, 3000);</script>

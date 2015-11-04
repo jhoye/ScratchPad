@@ -1,0 +1,182 @@
+﻿@using Scratch.Web.Models
+
+@model PageViewModel
+
+@{
+    Layout = null;
+}
+
+<div id="toolbar">
+    <ul class="menu">
+        <li>
+            <a @(Model.ActiveMenuItem == PageViewModel.MenuItems.PageEditing ? " class=active" : string.Empty) data-action="">
+                <img alt="Page Editing" title="Page Editing" src="~/Content/fugue/document.png"/>
+                <span>Page Editing</span>
+            </a>
+        </li>
+        <li>
+            <a @(Model.ActiveMenuItem == PageViewModel.MenuItems.WebsiteAdmin ? " class=active" : string.Empty) data-action="">
+                <img alt="Admin" title="Admin" src="~/Content/fugue/gear.png" />
+                <span>Website Admin</span>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Logout", "Page")">
+                <img alt="Log Out" title="Log Out" src="~/Content/fugue/lock.png"/>
+                <span>Log Out</span>
+            </a>
+        </li>
+    </ul>
+@switch(Model.ActiveMenuItem)
+{
+    case PageViewModel.MenuItems.PageEditing:
+        <ul class="menu">
+            <li>
+                <a data-action="SaveChanges">
+                    <img alt="Save Changes" title="Save Changes" src="~/Content/fugue/disk-black.png"/>
+                    <span>Save Changes</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Content Palette" title="Content Palette" src="~/Content/fugue/palette.png"/>
+                    <span>Content Palette</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Edit Page" title="Edit Page" src="~/Content/fugue/document--pencil.png"/>
+                    <span>Edit Page</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Add Page" title="Add Page" src="~/Content/fugue/document--plus.png"/>
+                    <span>Add Page</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Delete Page" title="Delete Page" src="~/Content/fugue/document--minus.png"/>
+                    <span>Delete Page</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Site Navigation" title="Site Navigation" src="~/Content/fugue/compass.png"/>
+                    <span>Site Navigation</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="File Manager" title="File Manager" src="~/Content/fugue/folder-open-image.png"/>
+                    <span>File Manager</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Webpage Analytics" title="Webpage Analytics" src="~/Content/fugue/system-monitor.png"/>
+                    <span>Webpage Analytics</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Idea Collector" title="Idea Collector" src="~/Content/fugue/light-bulb-off.png"/>
+                    <span>Idea Collector</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="@Url.Action("GtdTreeview", "Page")">
+                    <img alt="GTD Treeview" title="GTD Treeview" src="~/Content/fugue/lightning.png"/>
+                    <span>GTD Treeview</span>
+                </a>
+            </li>
+        </ul>
+        break;
+    case PageViewModel.MenuItems.WebsiteAdmin:
+        <ul class="menu">
+            <li>
+                <a data-action="">
+                    <img alt="Edit Content Palette" title="Content Palette" src="~/Content/fugue/palette.png"/>
+                    <span>Edit Content Palette</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Add Page" title="Add Page" src="~/Content/fugue/document--plus.png"/>
+                    <span>Add Page</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Delete Page" title="Delete Page" src="~/Content/fugue/document--minus.png"/>
+                    <span>Delete Page</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Site Navigation" title="Site Navigation" src="~/Content/fugue/compass.png"/>
+                    <span>Site Navigation</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Site Search" title="Site Search" src="~/Content/fugue/magnifier-left.png"/>
+                    <span>Site Search</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Web Forms" title="Web Forms" src="~/Content/fugue/application-form.png"/>
+                    <span>Web Forms</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Store" title="Store" src="~/Content/fugue/barcode.png"/>
+                    <span>Store</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Syndicated Content" title="Syndicated Content" src="~/Content/fugue/feed.png"/>
+                    <span>Syndicated Content</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="File Manager" title="File Manager" src="~/Content/fugue/folder-open-image.png"/>
+                    <span>File Manager</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Website Analytics" title="Website Analytics" src="~/Content/fugue/system-monitor.png"/>
+                    <span>Website Analytics</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Website Settings" title="Website Settings" src="~/Content/fugue/equalizer.png"/><span>Website Settings</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="User Profiles" title="User Profiles" src="~/Content/fugue/user-silhouette.png"/><span>User Profiles</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="Idea Collector" title="Idea Collector" src="~/Content/fugue/light-bulb-off.png"/><span>Idea Collector</span>
+                </a>
+            </li>
+            <li>
+                <a data-action="">
+                    <img alt="GTD Treeview" title="GTD Treeview" src="~/Content/fugue/lightning.png"/><span>GTD Treeview</span>
+                </a>
+            </li>
+        </ul>
+        break;
+}
+    <div id="toolbar-pane"></div>
+</div>

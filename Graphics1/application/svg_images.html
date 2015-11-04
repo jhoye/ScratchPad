@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SVG Images</title>
+    <meta name="Description" content="SVG image manipulation demonstration" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <!--
+    <svg width="400" height="100">
+        <rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
+    </svg>
+    -->
+    <svg id="x" width="400" height="100"
+         xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink">
+    </svg>
+    <script src="jquery-1.8.0.min.js"></script>
+    <script src="json.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            
+            var x = $("#x");
+            
+            x.append('<rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />');
+            
+            console.dir(x);
+            
+            //svg.append('<rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />');
+        });
+    </script>
+    <!--
+    <rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" />
+    -->
+</body>
+</html>

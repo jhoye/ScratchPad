@@ -115,23 +115,49 @@
   <ItemGroup>
     <Content Include="Content\authentication.css" />
     <Content Include="Content\fugue\application-form.png" />
+    <Content Include="Content\fugue\arrow-circle-double.png" />
+    <Content Include="Content\fugue\balloon.png" />
     <Content Include="Content\fugue\barcode.png" />
+    <Content Include="Content\fugue\blueprint.png" />
+    <Content Include="Content\fugue\books-stack.png" />
+    <Content Include="Content\fugue\calendar-month.png" />
+    <Content Include="Content\fugue\calendar-select.png" />
     <Content Include="Content\fugue\compass.png" />
+    <Content Include="Content\fugue\control-double.png" />
+    <Content Include="Content\fugue\control-pause.png" />
+    <Content Include="Content\fugue\control.png" />
     <Content Include="Content\fugue\disk-black.png" />
     <Content Include="Content\fugue\document--minus.png" />
     <Content Include="Content\fugue\document--pencil.png" />
     <Content Include="Content\fugue\document--plus.png" />
+    <Content Include="Content\fugue\document-list.png" />
     <Content Include="Content\fugue\equalizer.png" />
     <Content Include="Content\fugue\feed.png" />
     <Content Include="Content\fugue\folder-open-image.png" />
+    <Content Include="Content\fugue\folder.png" />
+    <Content Include="Content\fugue\folders-stack.png" />
+    <Content Include="Content\fugue\inbox.png" />
     <Content Include="Content\fugue\light-bulb-off.png" />
     <Content Include="Content\fugue\lightning.png" />
     <Content Include="Content\fugue\magnifier-left.png" />
+    <Content Include="Content\fugue\mobile-phone.png" />
+    <Content Include="Content\fugue\monitor-off.png" />
+    <Content Include="Content\fugue\monitor.png" />
     <Content Include="Content\fugue\palette.png" />
+    <Content Include="Content\fugue\pencil.png" />
+    <Content Include="Content\fugue\receipts.png" />
+    <Content Include="Content\fugue\status-away.png" />
+    <Content Include="Content\fugue\status-busy.png" />
+    <Content Include="Content\fugue\status-offline.png" />
+    <Content Include="Content\fugue\status.png" />
     <Content Include="Content\fugue\system-monitor.png" />
+    <Content Include="Content\fugue\traffic-light.png" />
     <Content Include="Content\fugue\user-silhouette.png" />
     <Content Include="Content\i_loading.gif" />
+    <Content Include="Content\settings.css" />
     <Content Include="Content\toolbar.css" />
+    <Content Include="Content\treeview.css" />
+    <Content Include="Content\treeview_sprite.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\knockout-3.3.0.debug.js" />
     <Content Include="Scripts\knockout-3.3.0.js" />
@@ -140,22 +166,48 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\ContentTypesController.cs" />
+    <Compile Include="Controllers\ContentPaletteController.cs" />
+    <Compile Include="Controllers\FileManagerController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\ScratchControllerBase.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\SyndicatedContentController.cs" />
+    <Compile Include="Controllers\TreeviewController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WebFormsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AuthenticationHelper.cs" />
-    <Compile Include="Models\ContentTypes\ContentTypeViewModel.cs" />
+    <Compile Include="Models\Admin\IndexViewModel.cs" />
+    <Compile Include="Models\Analytics\IndexViewModel.cs" />
+    <Compile Include="Models\ContentPalette\ContentTypeViewModel.cs" />
     <Compile Include="Models\Authentication\LoginViewModel.cs" />
     <Compile Include="Models\Authentication\LogoutViewModel.cs" />
+    <Compile Include="Models\ContentPalette\IndexViewModel.cs" />
+    <Compile Include="Models\FileManager\IndexViewModel.cs" />
+    <Compile Include="Models\Navigation\IndexViewModel.cs" />
     <Compile Include="Models\Page\PageViewModel.cs" />
-    <Compile Include="Models\Settings\SettingsViewModel.cs" />
+    <Compile Include="Models\Search\IndexViewModel.cs" />
+    <Compile Include="Models\Settings\CacheSettings.cs" />
+    <Compile Include="Models\Settings\DatabaseSettings.cs" />
+    <Compile Include="Models\Settings\EmailSettings.cs" />
+    <Compile Include="Models\Settings\IndexViewModel.cs" />
+    <Compile Include="Models\Store\IndexViewModel.cs" />
+    <Compile Include="Models\SyndicatedContent\IndexViewModel.cs" />
+    <Compile Include="Models\Treeview\Branch.cs" />
+    <Compile Include="Models\Treeview\IndexViewModel.cs" />
+    <Compile Include="Models\Users\IndexViewModel.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Models\WebForms\IndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Settings\SettingsBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -167,6 +219,21 @@
     <Content Include="Views\Page\Get.cshtml" />
     <Content Include="Views\Shared\_WebsiteAdminLayout.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Analytics\Index.cshtml" />
+    <Content Include="Views\ContentPalette\Index.cshtml" />
+    <Content Include="Views\FileManager\Index.cshtml" />
+    <Content Include="Views\Navigation\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\SyndicatedContent\Index.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\WebForms\Index.cshtml" />
+    <Content Include="Views\Treeview\Index.cshtml" />
+    <Content Include="Views\Settings\_Settings.cshtml" />
+    <Content Include="Views\Settings\Cache.cshtml" />
+    <Content Include="Views\Settings\Database.cshtml" />
+    <Content Include="Views\Settings\Email.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,7 +243,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ContentTypes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Scratch.Data\Scratch.Data.csproj">

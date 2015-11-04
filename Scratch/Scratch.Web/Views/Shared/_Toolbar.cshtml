@@ -1,4 +1,5 @@
-﻿@using Scratch.Web.Models
+﻿@using Scratch
+@using Scratch.Web.Models
 
 @model ViewModelBase
 
@@ -6,181 +7,64 @@
     Layout = null;
 }
 
+@helper MenuItem(PageViewModel.MenuItems menuItem, string icon, string url, bool isLink = true)
+{
+    var text = Enums.GetDescription(menuItem);
+
+    var attributes = new Dictionary<string, string>();
+
+    if (Model.IsActive(menuItem))
+    {
+        attributes.Add("class", "active");
+    }
+
+    attributes.Add((isLink ? "href" : "data-action"), url);
+    
+    <li>
+        <a @(String.Join(" ", attributes.Select(a => a.Key + "=" + a.Value)))>
+            <img alt="@text" title="@text" src="~/Content/fugue/@icon"/>
+            <span>@text</span>
+        </a>
+    </li>
+}
+
 <div id="toolbar">
     <ul class="menu">
-        <li>
-            <a @(Model.ActiveMenuItem == PageViewModel.MenuItems.PageEditing ? " class=active" : string.Empty) data-action="">
-                <img alt="Page Editing" title="Page Editing" src="~/Content/fugue/document.png"/>
-                <span>Page Editing</span>
-            </a>
-        </li>
-        <li>
-            <a @(Model.ActiveMenuItem == PageViewModel.MenuItems.WebsiteAdmin ? " class=active" : string.Empty) href="/Admin/Settings">
-                <img alt="Admin" title="Admin" src="~/Content/fugue/gear.png"/>
-                <span>Website Admin</span>
-            </a>
-        </li>
-        <li>
-            <a href="/Logout">
-                <img alt="Log Out" title="Log Out" src="~/Content/fugue/lock.png"/>
-                <span>Log Out</span>
-            </a>
-        </li>
+        @MenuItem(PageViewModel.MenuItems.PageEditing, "document.png", "/")
+        @MenuItem(PageViewModel.MenuItems.WebsiteAdmin, "gear.png", "/Admin")
+        @MenuItem(PageViewModel.MenuItems.IdeaCollector, "light-bulb-off.png", "#", false)
+        @MenuItem(PageViewModel.MenuItems.Treeview, "lightning.png", "/Treeview")
+        @MenuItem(PageViewModel.MenuItems.LogOut, "lock.png", "/Logout")
     </ul>
-    @switch (Model.ActiveMenuItem)
+    @if (Model.IsActive(PageViewModel.MenuItems.PageEditing))
     {
-        case PageViewModel.MenuItems.PageEditing:
-            <ul class="menu">
-                <li>
-                    <a data-action="SaveChanges">
-                        <img alt="Save Changes" title="Save Changes" src="~/Content/fugue/disk-black.png"/>
-                        <span>Save Changes</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Content Palette" title="Content Palette" src="~/Content/fugue/palette.png"/>
-                        <span>Content Palette</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Edit Page" title="Edit Page" src="~/Content/fugue/document--pencil.png"/>
-                        <span>Edit Page</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Add Page" title="Add Page" src="~/Content/fugue/document--plus.png"/>
-                        <span>Add Page</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Delete Page" title="Delete Page" src="~/Content/fugue/document--minus.png"/>
-                        <span>Delete Page</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Site Navigation" title="Site Navigation" src="~/Content/fugue/compass.png"/>
-                        <span>Site Navigation</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="File Manager" title="File Manager" src="~/Content/fugue/folder-open-image.png"/>
-                        <span>File Manager</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Webpage Analytics" title="Webpage Analytics" src="~/Content/fugue/system-monitor.png"/>
-                        <span>Webpage Analytics</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Idea Collector" title="Idea Collector" src="~/Content/fugue/light-bulb-off.png"/>
-                        <span>Idea Collector</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="GTD Treeview" title="GTD Treeview" src="~/Content/fugue/lightning.png"/>
-                        <span>GTD Treeview</span>
-                    </a>
-                </li>
-            </ul>
-            break;
-        case PageViewModel.MenuItems.WebsiteAdmin:
-            <ul class="menu">
-                <li>
-                    <a data-action="">
-                        <img alt="Edit Content Palette" title="Content Palette" src="~/Content/fugue/palette.png"/>
-                        <span>Edit Content Palette</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Add Page" title="Add Page" src="~/Content/fugue/document--plus.png"/>
-                        <span>Add Page</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Delete Page" title="Delete Page" src="~/Content/fugue/document--minus.png"/>
-                        <span>Delete Page</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Site Navigation" title="Site Navigation" src="~/Content/fugue/compass.png"/>
-                        <span>Site Navigation</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Site Search" title="Site Search" src="~/Content/fugue/magnifier-left.png"/>
-                        <span>Site Search</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Web Forms" title="Web Forms" src="~/Content/fugue/application-form.png"/>
-                        <span>Web Forms</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Store" title="Store" src="~/Content/fugue/barcode.png"/>
-                        <span>Store</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Syndicated Content" title="Syndicated Content" src="~/Content/fugue/feed.png"/>
-                        <span>Syndicated Content</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="File Manager" title="File Manager" src="~/Content/fugue/folder-open-image.png"/>
-                        <span>File Manager</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Website Analytics" title="Website Analytics" src="~/Content/fugue/system-monitor.png"/>
-                        <span>Website Analytics</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Website Settings" title="Website Settings" src="~/Content/fugue/equalizer.png"/>
-                        <span>Website Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="User Profiles" title="User Profiles" src="~/Content/fugue/user-silhouette.png"/>
-                        <span>User Profiles</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="Idea Collector" title="Idea Collector" src="~/Content/fugue/light-bulb-off.png"/>
-                        <span>Idea Collector</span>
-                    </a>
-                </li>
-                <li>
-                    <a data-action="">
-                        <img alt="GTD Treeview" title="GTD Treeview" src="~/Content/fugue/lightning.png"/>
-                        <span>GTD Treeview</span>
-                    </a>
-                </li>
-            </ul>
-            break;
+        <ul class="menu">
+            @MenuItem(PageViewModel.MenuItems.PageEditing_SaveChanges, "disk-black.png", "#", false)
+            @MenuItem(PageViewModel.MenuItems.PageEditing_ContentPalette, "palette.png", "#", false)
+            @MenuItem(PageViewModel.MenuItems.PageEditing_EditPage, "document--pencil.png", "#", false)
+            @MenuItem(PageViewModel.MenuItems.PageEditing_AddPage, "document--plus.png", "#", false)
+            @MenuItem(PageViewModel.MenuItems.PageEditing_DeletePage, "document--minus.png", "#", false)
+            @MenuItem(PageViewModel.MenuItems.PageEditing_WebsiteNavigation, "compass.png", "#", false)
+            @MenuItem(PageViewModel.MenuItems.PageEditing_FileManager, "folder-open-image.png", "#", false)
+            @MenuItem(PageViewModel.MenuItems.PageEditing_WebpageAnalytics, "system-monitor.png", "#", false)
+        </ul>
+    }
+    @if (Model.IsActive(PageViewModel.MenuItems.WebsiteAdmin))
+    {
+        <ul class="menu">
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_EditContentPalette, "palette.png", "/Admin/ContentPalette")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_AddPage, "document--plus.png", "#")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_DeletePage, "document--minus.png", "#")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_WebsiteNavigation, "compass.png", "/Admin/Navigation")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_WebsiteSearch, "magnifier-left.png", "/Admin/Search")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_WebForms, "application-form.png", "/Admin/WebForms")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_Store, "barcode.png", "/Admin/Store")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_SyndicatedContent, "feed.png", "/Admin/SyndicatedContent")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_FileManager, "folder-open-image.png", "/Admin/FileManager")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_WebsiteAnalytics, "system-monitor.png", "/Admin/Analytics")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_WebsiteSettings, "equalizer.png", "/Admin/Settings")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_Users, "user-silhouette.png", "/Admin/Users")
+        </ul>
     }
     <div id="toolbar-pane"></div>
 </div>

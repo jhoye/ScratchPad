@@ -4,7 +4,7 @@
     {
         public string ReturnUrl { get; set; }
 
-        public LogoutViewModel() : base(false)
+        public LogoutViewModel() : base(MenuItems.LogOut, false)
         {
         }
     }

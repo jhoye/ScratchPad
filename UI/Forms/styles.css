@@ -1,0 +1,14 @@
+body { font:12px monospace; background: #eee; margin:0; }
+h1, form { padding:20px; }
+fieldset { margin-bottom:10px; border:1px #888 solid; border-radius:5px; }
+fieldset.inline-radio { border:0; margin:0; padding:0px; }
+fieldset.inline-radio legend,
+fieldset.inline-radio span,
+fieldset.inline-radio div.field { display:inline; padding:0px; }
+fieldset.inline-radio div.field { margin-left:5px; }
+fieldset.inline-radio legend { float:left; }
+fieldset.inline-radio span,
+div.field { line-height:25px; }
+
+div.field.multiple-select label { float:left; }
+div.field.multiple-select select { float:left; margin-left:5px; }

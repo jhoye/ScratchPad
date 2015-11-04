@@ -1,0 +1,78 @@
+﻿@using System.Linq;
+@using Scratch
+@using Scratch.Web.Models.Treeview;
+
+@model IndexViewModel
+
+@{
+    ViewBag.Title = "GTD Treeview";
+    
+    Layout = "~/Views/Shared/_WebsiteAdminLayout.cshtml";
+}
+
+@section Head
+{
+    <link href="/Content/treeview.css" rel="stylesheet" type="text/css" />
+}
+
+@helper Render(List<Branch> branches)
+{
+    <ul class="tree">
+        @foreach (var branch in branches)
+        {
+            var toggleClassAttribute = branch.Branches.Any()
+                ? "toggle toggle-minus"
+                : branch.HasChildren
+                    ? "toggle toggle-plus"
+                    : "toggle";
+
+            var headerText = Enums.GetDescription(branch.Type);
+
+            var headerClassAttribute = "tree-" + headerText.ToLower().Replace(" / ", " ").Replace("'", "").Replace(".", "").Replace(" ", "-");
+            
+            <li class="tree">
+                <section class="tree-lines">
+                    <span class="@toggleClassAttribute"></span>
+                </section>
+                <section class="tree-item">
+                    <header class="@headerClassAttribute">@headerText</header>
+                    @if (branch.Branches.Any())
+                    {
+                        @Render(branch.Branches)
+                    }
+                </section>
+            </li>
+        }
+    </ul>
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div id="tree">
+    @Render(Model.Branches)
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            $("span.toggle").on("click", function () {
+
+                var toggle = $(this),
+                    list = toggle.closest("section.tree-lines").next("section.tree-item").children("ul.tree");
+
+                if (toggle.hasClass("toggle-minus")) {
+                    toggle.removeClass("toggle-minus").addClass("toggle-plus");
+                    list.hide();
+                } else if (toggle.hasClass("toggle-plus")) {
+                    toggle.removeClass("toggle-plus").addClass("toggle-minus");
+                    if (list.length > 0) {
+                        list.show();
+                    } else {
+                        // load list asynchronously
+                    }
+                }
+            });
+        });
+    </script>
+}

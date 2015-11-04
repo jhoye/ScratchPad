@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UI Prototype - Forms</title>
+    <meta name="Description" content="Prototype/demonstration of form elements" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="styles.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Form Elements</h1>
+    <form>
+        <h2>Check-Box</h2>
+        <fieldset>
+            <legend><span>Optional Input</span></legend>
+            <div class="field">
+                <label>
+                    <input type="checkbox" />
+                    I want this.
+                </label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><span>Terms and Conditions</span></legend>
+            <div class="field">
+                <label>
+                    <input type="checkbox" />
+                    I assent.
+                </label>
+            </div>
+        </fieldset>
+    </form>
+    <form>
+        <h2>Radio Buttons</h2>
+        <fieldset>
+            <legend><span>Required Input; Limited Options; Need to See All Options</span></legend>
+            <fieldset class="inline-radio">
+                <legend><span>The answer is:</span></legend>
+                <div class="field">
+                    <label>
+                        <input type="radio" name="rdo" checked="checked" />
+                        yes
+                    </label>
+                </div>
+                <div class="field">
+                    <label>
+                        <input type="radio" name="rdo" />
+                        no
+                    </label>
+                </div>
+            </fieldset>
+        </fieldset>
+    </form>
+    <form>
+        <h2>Drop-Down</h2>
+        <fieldset>
+            <legend><span>Required or Optional Input; Limited Options; Need to Save Space</span></legend>
+            <div class="field">
+                <label>
+                    Background color:
+                    <select>
+                        <option>not specified</option>
+                        <option>red</option>
+                        <option>orange</option>
+                        <option>yellow</option>
+                        <option>green</option>
+                        <option>blue</option>
+                        <option>indigo</option>
+                        <option>violet</option>
+                    </select>
+                </label>
+            </div>
+        </fieldset>
+    </form>
+    <form>
+        <h2>Multi-Select-Box</h2>
+        <fieldset>
+            <legend><span>Required or Optional Input; Limited Options; Need to See All Options; Need to Select Multiple Options or None</span></legend>
+            <div class="field multiple-select">
+                <label for="mlt">Hotdog Toppings:</label>
+                <select id="mlt" multiple="multiple" size="6">
+                    <option>yellow mustard</option>
+                    <option>spicy brown mustard</option>
+                    <option>sour kraut</option>
+                    <option>chopped onions</option>
+                    <option>chili</option>
+                    <option>relish</option>
+                </select>
+            </div>
+        </fieldset>
+    </form>
+    <script src="jquery-1.8.0.min.js"></script>
+    <script type="text/javascript">
+    </script>
+</body>
+</html>
