@@ -19,36 +19,77 @@ namespace Scratch.Data.Core
             Action loadTableInfo = () =>
             {
                 addTableInfo("Settings", CoreData.Settings.Count());
+
                 addTableInfo("ContentTypes", CoreData.ContentTypes.Count());
+
                 addTableInfo("Fields", CoreData.Fields.Count());
             };
 
-            databaseSettings.Exists = CoreData.Database.Exists();
-
-            if (databaseSettings.Exists)
+            Action createDatabase = () =>
             {
-                databaseSettings.SetSignal("Database exists.");
-                loadTableInfo();
-            }
-            else
-            {
-                if (databaseSettings.CreateIfNotExists)
+                if (CoreData.Database.CreateIfNotExists())
                 {
-                    if (CoreData.Database.CreateIfNotExists())
+                    databaseSettings.Exists = true;
+
+                    databaseSettings.CompatibleSchema = true;
+
+                    databaseSettings.SetSignal("Database was created.");
+
+                    loadTableInfo();
+                }
+                else
+                {
+                    databaseSettings.SetSignal("An attempt to create the database failed.", Enums.Andons.Red);
+                }
+            };
+
+            try
+            {
+                if (CoreData.Database.Exists())
+                {
+                    databaseSettings.Exists = true;
+
+                    if (databaseSettings.DropAndCreateIfNotCompatibleSchema)
                     {
-                        databaseSettings.Exists = true;
-                        databaseSettings.SetSignal("Database was created.");
-                        loadTableInfo();
+                        if (CoreData.Database.Delete())
+                        {
+                            databaseSettings.SetSignal("Database was dropped.");
+
+                            createDatabase();
+                        }
+                        else
+                        {
+                            databaseSettings.SetSignal("An attempt to drop the database failed.", Enums.Andons.Red);
+                        }
                     }
                     else
                     {
-                        databaseSettings.SetSignal("An attempt to create the database failed.", Enums.Andons.Red);
+                        if (CoreData.Database.CompatibleWithModel(true))
+                        {
+                            databaseSettings.CompatibleSchema = true;
+
+                            databaseSettings.SetSignal("Database exists.");
+
+                            loadTableInfo();
+                        }
+                        else
+                        {
+                            databaseSettings.SetSignal("Database exists, but it's schema is not compatible.", Enums.Andons.Red);
+                        }
                     }
+                }
+                else if (databaseSettings.CreateIfNotExists)
+                {
+                    createDatabase();
                 }
                 else
                 {
                     databaseSettings.SetSignal("Database does not exist.", Enums.Andons.Yellow);
                 }
+            }
+            catch (Exception exception)
+            {
+                databaseSettings.SetSignal(exception);
             }
         }
         

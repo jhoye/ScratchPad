@@ -128,12 +128,14 @@
     <Content Include="Content\fugue\control-double.png" />
     <Content Include="Content\fugue\control-pause.png" />
     <Content Include="Content\fugue\control.png" />
+    <Content Include="Content\fugue\cross-white.png" />
     <Content Include="Content\fugue\disk-black.png" />
     <Content Include="Content\fugue\document--minus.png" />
     <Content Include="Content\fugue\document--pencil.png" />
     <Content Include="Content\fugue\document--plus.png" />
     <Content Include="Content\fugue\document-list.png" />
     <Content Include="Content\fugue\equalizer.png" />
+    <Content Include="Content\fugue\exclamation-white.png" />
     <Content Include="Content\fugue\feed.png" />
     <Content Include="Content\fugue\folder-open-image.png" />
     <Content Include="Content\fugue\folder.png" />
@@ -143,17 +145,27 @@
     <Content Include="Content\fugue\light-bulb-off.png" />
     <Content Include="Content\fugue\lightning.png" />
     <Content Include="Content\fugue\magnifier-left.png" />
+    <Content Include="Content\fugue\minus-white.png" />
     <Content Include="Content\fugue\mobile-phone.png" />
     <Content Include="Content\fugue\monitor-off.png" />
     <Content Include="Content\fugue\monitor.png" />
+    <Content Include="Content\fugue\navigation-000-white.png" />
+    <Content Include="Content\fugue\navigation-090-white.png" />
+    <Content Include="Content\fugue\navigation-180-white.png" />
+    <Content Include="Content\fugue\navigation-270-white.png" />
     <Content Include="Content\fugue\palette.png" />
     <Content Include="Content\fugue\pencil.png" />
+    <Content Include="Content\fugue\plus-white.png" />
+    <Content Include="Content\fugue\question-white.png" />
     <Content Include="Content\fugue\receipts.png" />
     <Content Include="Content\fugue\status-away.png" />
     <Content Include="Content\fugue\status-busy.png" />
     <Content Include="Content\fugue\status-offline.png" />
     <Content Include="Content\fugue\status.png" />
     <Content Include="Content\fugue\system-monitor.png" />
+    <Content Include="Content\fugue\tick-white.png" />
+    <Content Include="Content\fugue\toggle-expand.png" />
+    <Content Include="Content\fugue\toggle.png" />
     <Content Include="Content\fugue\traffic-light.png" />
     <Content Include="Content\fugue\user-silhouette.png" />
     <Content Include="Content\i_loading.gif" />
@@ -199,6 +211,7 @@
     <Compile Include="Models\FileManager\IndexViewModel.cs" />
     <Compile Include="Models\Idea\IdeaViewModel.cs" />
     <Compile Include="Models\Navigation\IndexViewModel.cs" />
+    <Compile Include="Models\Page\AddViewModel.cs" />
     <Compile Include="Models\Page\PageViewModel.cs" />
     <Compile Include="Models\Search\IndexViewModel.cs" />
     <Compile Include="Models\Settings\DatabaseSettingsViewModel.cs" />
@@ -239,7 +252,9 @@
     <Content Include="Views\Settings\Database.cshtml" />
     <Content Include="Views\Settings\Generic.cshtml" />
     <Content Include="Views\Admin\About.cshtml" />
+    <Content Include="Views\ContentPalette\ContentType.cshtml" />
     <None Include="Views\Idea\Collect.cshtml" />
+    <Content Include="Views\Page\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

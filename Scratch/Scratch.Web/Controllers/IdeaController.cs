@@ -13,6 +13,8 @@ namespace Scratch.Web.Controllers
         [HttpPost]
         public ActionResult Collect(IdeaViewModel model)
         {
+            // TODO: collect idea
+
             return View(model);
         }
     }

@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Scratch.Data.Core.DataModel
 {
     internal class ContentType
     {
-        [Key]
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public Guid? ParentId { get; set; }
+
+        public ContentType Parent { get; set; }
+
+        public virtual ICollection<ContentType> Children { get; set; }
 
         public virtual ICollection<Field> Fields { get; set; }
 

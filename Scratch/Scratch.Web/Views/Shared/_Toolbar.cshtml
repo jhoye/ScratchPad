@@ -43,7 +43,7 @@
             @MenuItem(PageViewModel.MenuItems.PageEditing_SaveChanges, "disk-black.png", "#", false)
             @MenuItem(PageViewModel.MenuItems.PageEditing_ContentPalette, "palette.png", "#", false)
             @MenuItem(PageViewModel.MenuItems.PageEditing_EditPage, "document--pencil.png", "#", false)
-            @MenuItem(PageViewModel.MenuItems.PageEditing_AddPage, "document--plus.png", "#", false)
+            @MenuItem(PageViewModel.MenuItems.PageEditing_AddPage, "document--plus.png", "/Admin/Page/Add", false)
             @MenuItem(PageViewModel.MenuItems.PageEditing_DeletePage, "document--minus.png", "#", false)
             @MenuItem(PageViewModel.MenuItems.PageEditing_WebsiteNavigation, "compass.png", "#", false)
             @MenuItem(PageViewModel.MenuItems.PageEditing_FileManager, "folder-open-image.png", "#", false)
@@ -54,7 +54,7 @@
     {
         <ul class="menu">
             @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_EditContentPalette, "palette.png", "/Admin/ContentPalette")
-            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_AddPage, "document--plus.png", "#")
+            @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_AddPage, "document--plus.png", "/Admin/Page/Add", false)
             @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_DeletePage, "document--minus.png", "#")
             @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_WebsiteNavigation, "compass.png", "/Admin/Navigation")
             @MenuItem(PageViewModel.MenuItems.WebsiteAdmin_WebsiteSearch, "magnifier-left.png", "/Admin/Search")
@@ -78,33 +78,48 @@
     $(function() {
 
         var toolbar = $("#toolbar"),
-            spans = toolbar.find("span"),
             toolbarPane = $("#toolbar-pane");
 
-        toolbar
-            .mouseover(function() {
-                spans.show();
-                toolbarPane.show();
+        //toolbar
+        //    .mouseover(function() {
+        //        toolbarPane.show();
+        //    })
+        //    .mouseout(function() {
+        //        toolbarPane.hide();
+        //    });
+        
+        toolbar.find("ul").each(function () {
+
+            var ul = $(this),
+                spans = ul.find("span");
+
+            ul
+            .mouseover(function () {
+                spans.css("display", "block");
             })
-            .mouseout(function() {
+            .mouseout(function () {
                 spans.hide();
-                toolbarPane.hide();
             });
+        })
 
         toolbar.find("a").each(function() {
 
             var a = $(this),
                 action = a.attr("data-action");
 
-            a.click(function() {
-                a.addClass("active");
-                toolbarPane.load(action, function() {
-                    toolbarPane.find("a.cancel").click(function() {
-                        toolbarPane.empty();
-                        return false;
+            if (action !== "undefined")
+            {
+                a.click(function () {
+                    a.addClass("active");
+                    toolbarPane.load(action, function() {
+                        toolbarPane.find("a.cancel").click(function () {
+                            toolbarPane.empty();
+                            a.removeClass("active");
+                            return false;
+                        });
                     });
                 });
-            });
+            }
         });
 
         //$("html").click(function () {

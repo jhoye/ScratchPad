@@ -17,8 +17,13 @@ namespace Scratch.Web.Models.Settings
 
         public bool Exists { get; set; }
 
+        public bool CompatibleSchema { get; set; }
+
         [Display(Name = "Create Database On Save")]
         public bool CreateIfNotExists { get; set; }
+
+        [Display(Name = "Drop and Create Database On Save")]
+        public bool DropAndCreateIfNotCompatibleSchema { get; set; }
 
         public List<DatabaseTableInfoListItem> Tables { get; set; }
 

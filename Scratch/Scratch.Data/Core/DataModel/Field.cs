@@ -1,21 +1,36 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Scratch.Data.Core.DataModel
 {
     internal class Field
     {
-        [Key]
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public bool IsNullable { get; set; }
 
-        public int FieldType { get; set; }
+        public int FieldTypeValue { get; set; }
+
+        public Enums.FieldTypes FieldType
+        {
+            get
+            {
+                return Enums.CastEnum<Enums.FieldTypes>(FieldTypeValue);
+            }
+
+            set
+            {
+                FieldTypeValue = (int) value;
+            }
+        }
+
+        public Guid ContentTypeId { get; set; }
 
         public ContentType ContentType { get; set; }
-
+        
         public Field()
         {
         }
@@ -33,7 +48,7 @@ namespace Scratch.Data.Core.DataModel
 
             IsNullable = field.IsNullable;
 
-            FieldType = (int) field.FieldType;
+            FieldType = field.FieldType;
         }
 
         public void MapTo(IField field)
@@ -44,7 +59,7 @@ namespace Scratch.Data.Core.DataModel
 
             field.IsNullable = IsNullable;
 
-            field.FieldType = Enums.CastEnum<Enums.FieldTypes>(FieldType);
+            field.FieldType = FieldType;
         }
 
         public IField ToListItem()

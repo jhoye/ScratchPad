@@ -1,7 +1,7 @@
 ﻿/***** website admin *****/
 
 body.website-admin #container {
-    margin: 0 0 0 100px;
+    margin: 0 100px;
     font: 13px monospace;
 }
 
@@ -13,6 +13,119 @@ body.website-admin a {
 body.website-admin a:hover {
     color: #0088ff;
     text-decoration: underline;
+}
+
+/***** icons *****/
+
+.icon {
+    background: transparent none no-repeat 0 0;
+    padding: 1px 0 0 22px;
+    line-height: 16px;
+}
+
+.icon.empty {
+    padding: 1px 0 0 16px;
+}
+
+.icon.plus {
+    background-image: url('fugue/plus-white.png');
+}
+
+.icon.minus {
+    background-image: url('fugue/minus-white.png');
+}
+
+.icon.toggle-more {
+    background-image: url('fugue/chevron-expand.png');
+}
+
+.icon.toggle-less {
+    background-image: url('fugue/chevron.png');
+}
+
+.icon.toggle-plus {
+    background-image: url('fugue/toggle-expand.png');
+}
+
+.icon.toggle-minus {
+    background-image: url('fugue/toggle.png');
+}
+
+.icon.x {
+    background-image: url('fugue/cross-white.png');
+}
+
+.icon.bang {
+    background-image: url('fugue/exclamation-white.png');
+}
+
+.icon.info {
+    background-image: url('fugue/information-white.png');
+}
+
+.icon.help {
+    background-image: url('fugue/question-white.png');
+}
+
+.icon.check {
+    background-image: url('fugue/tick-white.png');
+}
+
+.icon.arrow-right {
+    background-image: url('fugue/navigation-000-white.png');
+}
+
+.icon.arrow-up {
+    background-image: url('fugue/navigation-090-white.png');
+}
+
+.icon.arrow-left {
+    background-image: url('fugue/navigation-180-white.png');
+}
+
+.icon.arrow-down {
+    background-image: url('fugue/navigation-270-white.png');
+}
+
+.icon.pencil {
+    background-image: url('fugue/pencil.png');
+}
+
+/***** Messages *****/
+.message {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 5px 25px;
+    background-position: 5px;
+}
+
+.message.bang {
+    border-color: #ff0000;
+    background-color: #ffeeee;
+}
+
+.message.info {
+    border-color: #0088ff;
+    background-color: #eef8ff;
+}
+
+.message.check {
+    border-color: #00aa66;
+    background-color: #eefff8;
+}
+
+.message.icon.bang {
+    background-image: url('fugue/exclamation-red.png');
+}
+
+.message.icon.info {
+    background-image: url('fugue/information.png');
+}
+
+.message.icon.check {
+    background-image: url('fugue/tick-circle.png');
 }
 
 /***** toolbar *****/
@@ -56,6 +169,7 @@ body.website-admin a:hover {
     text-decoration: none;
     color: #000000;
     cursor: pointer;
+    position: relative;
 }
 
 #toolbar ul.menu a.active,
@@ -71,6 +185,32 @@ body.website-admin a:hover {
 
 #toolbar ul.menu span {
     display: none;
+    position: absolute; 
+    z-index: 2; 
+    width: 200px; 
+    left: 36px; 
+    height: 38px; 
+    top: -1px; 
+    line-height: 38px;
+    padding-left: 5px;
+    border-left: 1px #e0e0e0 solid;
+    background: #000000;
+    color: #ffffff;
+    opacity: .75;
+}
+
+#toolbar ul.menu a:hover span {
+    color: #000000;
+    opacity: 1;
+    background: #f8f8f8;
+    border-left: 1px #f8f8f8 solid;
+    border-top: 1px #ededed solid;
+    border-bottom: 1px #d8d8d8 solid;
+    border-right: 1px #d8d8d8 solid;
+    left: 36px;
+    height: 36px;
+    line-height: 36px;
+    top: -1px;
 }
 
 /***** table *****/

@@ -22,7 +22,21 @@
         </section>
         <section>
             <h2>Table Schema</h2>
-            @if (Model.Exists)
+            @if (!Model.Exists)
+            {
+                <div class="field checkbox">
+                    @Html.CheckBoxFor(a => a.CreateIfNotExists)
+                    @Html.LabelFor(a => a.CreateIfNotExists)
+                </div>
+            }
+            else if (!Model.CompatibleSchema)
+            {
+                <div class="field checkbox">
+                    @Html.CheckBoxFor(a => a.DropAndCreateIfNotCompatibleSchema)
+                    @Html.LabelFor(a => a.DropAndCreateIfNotCompatibleSchema)
+                </div>
+            }
+            else
             {
                 <dl>
                     @foreach (var table in Model.Tables)
@@ -32,15 +46,8 @@
                     }
                 </dl>
             }
-            else
-            {
-                <div class="field checkbox">
-                    @Html.CheckBoxFor(a => a.CreateIfNotExists)
-                    @Html.LabelFor(a => a.CreateIfNotExists)
-                </div>
-            }
         </section>
-        @if (!Model.Exists)
+        @if (!Model.Exists || !Model.CompatibleSchema)
         {
             <div>
                 <input class="save" type="button" value="Save" />

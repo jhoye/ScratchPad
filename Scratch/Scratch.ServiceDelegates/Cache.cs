@@ -51,7 +51,6 @@ namespace Scratch.ServiceDelegates
             {
                 return _cluster ?? (
                     _cluster = Cluster.Builder()
-                        .WithDefaultKeyspace(Keyspace)
                         .AddContactPoints(ContactPoints)
                         .Build());
             }
@@ -59,7 +58,7 @@ namespace Scratch.ServiceDelegates
 
         private ISession Session
         {
-            get { return _session ?? (_session = Cluster.Connect()); }
+            get { return _session ?? (_session = Cluster.Connect(Keyspace)); }
         }
 
         public Cache()
@@ -126,14 +125,12 @@ namespace Scratch.ServiceDelegates
                     .Bind(string.IsNullOrEmpty(slug) ? DefaultKey : slug)
                 );
         }
-
+        
         public void TestSettings(ISignal signal)
         {
             // used cluster address "127.0.0.1" locally
-            // used keyspace "scratch" locally
-            // TODO: test connection to cluster, test for keyspace existence, and create keyspace (and pages) if needed
-
-            try
+            // test connection to cluster, test for keyspace existence, and create keyspace (and pages) if needed
+            Action test = () =>
             {
                 var document = Get(DefaultKey);
 
@@ -146,6 +143,45 @@ namespace Scratch.ServiceDelegates
                 else
                 {
                     signal.SetSignal("Default cached document was found.");
+                }
+            };
+
+            try
+            {
+                try
+                {
+                    test();
+                }
+                catch (InvalidQueryException)
+                {
+                    using (var cluster = Cluster.Builder()
+                        .AddContactPoints(ContactPoints)
+                        .WithDefaultKeyspace(Keyspace)
+                        .Build())
+                    using (var session = cluster.ConnectAndCreateDefaultKeyspaceIfNotExists())
+                    {
+                        session.Execute(
+                            " CREATE TABLE " + Keyspace + ".pages (" +
+                            "     slug text PRIMARY KEY," +
+                            "     content text" +
+                            " ) WITH bloom_filter_fp_chance = 0.01" +
+                            "     AND caching = '{\"keys\":\"ALL\", \"rows_per_partition\":\"NONE\"}'" +
+                            "     AND comment = ''" +
+                            "     AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy'}" +
+                            "     AND compression = {'sstable_compression': 'org.apache.cassandra.io.compress.LZ4Compressor'}" +
+                            "     AND dclocal_read_repair_chance = 0.1" +
+                            "     AND default_time_to_live = 0" +
+                            "     AND gc_grace_seconds = 864000" +
+                            "     AND max_index_interval = 2048" +
+                            "     AND memtable_flush_period_in_ms = 0" +
+                            "     AND min_index_interval = 128" +
+                            "     AND read_repair_chance = 0.0" +
+                            "     AND speculative_retry = '99.0PERCENTILE';");
+                    }
+
+                    signal.SetSignal("Cache database was initialized.");
+
+                    test();
                 }
             }
             catch (Exception exception)

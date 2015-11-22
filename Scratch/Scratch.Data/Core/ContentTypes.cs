@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Scratch.Data.Core.DataModel;
 
@@ -6,6 +7,18 @@ namespace Scratch.Data.Core
 {
     public class ContentTypes : DataBase, IContentTypes
     {
+        public void Load(IContentTypeHierarchy contentTypesHierarchy)
+        {
+            contentTypesHierarchy.ContentTypes = GetChildren(CoreData.ContentTypes.ToList());
+        }
+
+        public void Load(IContentType contentType)
+        {
+            var contentTypeRecord = GetContentTypeRecord(contentType);
+
+            contentTypeRecord.MapTo(contentType);
+        }
+
         public void Save(IContentType contentType)
         {
             if (contentType.Id.HasValue)
@@ -24,13 +37,6 @@ namespace Scratch.Data.Core
             }
 
             CoreData.SaveChanges();
-        }
-
-        public void Load(IContentType contentType)
-        {
-            var contentTypeRecord = GetContentTypeRecord(contentType);
-
-            contentTypeRecord.MapTo(contentType);
         }
 
         public void Delete(IContentType contentType)
@@ -62,6 +68,19 @@ namespace Scratch.Data.Core
             }
 
             return record;
+        }
+
+        private List<ContentsTypeHierarchyListItem> GetChildren(List<ContentType> contentTypes, Guid? parentId = null)
+        {
+            return contentTypes
+                .Where(a => a.ParentId == parentId)
+                .Select(a => new ContentsTypeHierarchyListItem
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    Children = GetChildren(contentTypes, a.Id)
+                })
+                .ToList();
         }
     }
 }

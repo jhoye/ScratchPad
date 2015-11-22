@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Http;
 using Scratch.Data;
+using Scratch.Data.Core;
 using Scratch.ServiceDelegates;
 
 namespace Scratch.Web
@@ -30,6 +31,7 @@ namespace Scratch.Web
                     {
                         Cache = new Cache(),
                         Configuration = new Configuration(),
+                        ContentTypes = new ContentTypes(),
                         Mail = new Mail(),
                         Settings = new Data.Core.Settings(),
                         Users = new Users()
