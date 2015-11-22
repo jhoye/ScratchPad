@@ -32,9 +32,10 @@
     <ul class="menu">
         @MenuItem(PageViewModel.MenuItems.PageEditing, "document.png", "/")
         @MenuItem(PageViewModel.MenuItems.WebsiteAdmin, "gear.png", "/Admin")
-        @MenuItem(PageViewModel.MenuItems.IdeaCollector, "light-bulb-off.png", "#", false)
+        @MenuItem(PageViewModel.MenuItems.IdeaCollector, "light-bulb-off.png", "/Idea/Collect", false)
         @MenuItem(PageViewModel.MenuItems.Treeview, "lightning.png", "/Treeview")
         @MenuItem(PageViewModel.MenuItems.LogOut, "lock.png", "/Logout")
+        @MenuItem(PageViewModel.MenuItems.About, "information-white.png", "/Admin/About")
     </ul>
     @if (Model.IsActive(PageViewModel.MenuItems.PageEditing))
     {
@@ -97,7 +98,12 @@
 
             a.click(function() {
                 a.addClass("active");
-                toolbarPane.load(action);
+                toolbarPane.load(action, function() {
+                    toolbarPane.find("a.cancel").click(function() {
+                        toolbarPane.empty();
+                        return false;
+                    });
+                });
             });
         });
 

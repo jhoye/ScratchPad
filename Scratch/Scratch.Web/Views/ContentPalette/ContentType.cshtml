@@ -1,0 +1,26 @@
+﻿@model Scratch.Web.Models.ContentPalette.ContentTypeViewModel
+
+@{
+    ViewBag.Title = (Model.Id.HasValue ? "Edit" : "Add") + " Content Type";
+
+    Layout = "~/Views/Shared/_WebsiteAdminLayout.cshtml";
+}
+
+<a href="@Url.Action("Index", "ContentPalette")" class="icon arrow-left">Return to List</a>
+<br />
+@using (Html.BeginForm("Save", "ContentPalette"))
+{
+    @Html.HiddenFor(a => a.Id)
+    <br />
+    <section>
+        <div class="field">
+            @Html.LabelFor(a => a.Name)
+            @Html.TextBoxFor(a => a.Name)
+            @Html.ValidationMessageFor(a => a.Name)
+        </div>
+    </section>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}

@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using Scratch.Data.Core;
 using Scratch.Web.Models.Settings;
 
 namespace Scratch.Web.Controllers
@@ -7,42 +9,81 @@ namespace Scratch.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View(new IndexViewModel());
-        }
+            var model = new IndexViewModel();
 
-        public ActionResult Cache()
-        {
-            var model = new CacheSettings
-            {
-                Status = SettingsBase.Statuses.Green,
-                StatusMessage = "Okay."
-            };
+            model.Settings.Add(GetDatabaseSettings());
+
+            model.Settings.Add(GetViewModel(Components.Cache));
+            
+            model.Settings.Add(GetViewModel(Components.Mail));
 
             return View(model);
         }
 
-        public ActionResult Database()
+        [HttpPost]
+        public ActionResult Database(DatabaseSettingsViewModel model)
         {
-            var model = new DatabaseSettings
-            {
-                Status = SettingsBase.Statuses.Green,
-                StatusMessage = "Okay."
-            };
+            Load(model);
 
             return View(model);
         }
 
-        public ActionResult Email()
+        [HttpPost]
+        public ActionResult Generic(GenericSettingsViewModel model)
         {
-            System.Threading.Thread.Sleep(3000);
+            Components.Settings.Save(model.Settings);
 
-            var model = new EmailSettings
+            if (model.Settings.LoadException == null)
             {
-                Status = SettingsBase.Statuses.Green,
-                StatusMessage = "Okay."
-            };
+                model.SetSignal("Settings were saved.");
+            }
+            else
+            {
+                model.SetSignal(model.Settings.LoadException);
+            }
 
             return View(model);
+        }
+        
+        private GenericSettingsViewModel GetViewModel(ISettingsConsumer settingsConsumer)
+        {
+            var model = new GenericSettingsViewModel()
+            {
+                Settings = settingsConsumer.Settings,
+                Name = settingsConsumer.Settings.Section
+            };
+
+            if (settingsConsumer.Settings.IsLoaded)
+            {
+                model.SetSignal("Settings were loaded from database.");
+
+                settingsConsumer.TestSettings(model);
+            }
+            else if (settingsConsumer.Settings.LoadException == null)
+            {
+                model.SetSignal("Settings were not loaded.", Enums.Andons.Red);
+            }
+            else
+            {
+                model.SetSignal(settingsConsumer.Settings.LoadException);
+            }
+
+            return model;
+        }
+        
+        private DatabaseSettingsViewModel GetDatabaseSettings()
+        {
+            var model = new DatabaseSettingsViewModel();
+
+            Load(model);
+
+            return model;
+        }
+
+        private void Load(IDatabaseSettings model)
+        {
+            Components.Configuration.Load(model);
+            Components.Settings.Load(model);
         }
     }
 }

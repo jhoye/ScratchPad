@@ -8,8 +8,22 @@ namespace Scratch
     {
         #region enumerated types
 
+        public enum Andons
+        {
+            None,
+            Green,
+            Yellow,
+            Red
+        }
+
         public enum FieldTypes
         {
+            Boolean = 0,
+            UniqueIdentifier,
+            Text,
+            Integer,
+            Decimal,
+            FloatPointNumber,
             Date,
             Time,
             DateTime

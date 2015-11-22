@@ -1,0 +1,16 @@
+﻿@model Scratch.Web.Models.Idea.IdeaViewModel
+
+@{
+    Layout = null;
+}
+
+<form>
+    <div class="field">
+        @Html.LabelFor(a => a.Idea)
+        @Html.TextAreaFor(a => a.Idea)
+    </div>
+    <div class="field">
+        <input class="save" type="button" value="Save"/>
+        <a href="#" class="cancel">cancel</a>
+    </div>
+</form>

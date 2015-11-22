@@ -1,0 +1,22 @@
+﻿@model Scratch.Web.Models.Page.AddViewModel
+
+@{
+    Layout = null;
+}
+
+<form>
+    <div class="field">
+        @Html.LabelFor(a => a.Title)
+        @Html.TextBoxFor(a => a.Title, new {maxlength = 255})
+        @Html.ValidationMessageFor(a => a.Title)
+    </div>
+    <div class="field">
+        @Html.LabelFor(a => a.Slug)
+        @Html.TextBoxFor(a => a.Slug, new { maxlength = 255 })
+        @Html.ValidationMessageFor(a => a.Slug)
+    </div>
+    <div class="field">
+        <input class="save" type="button" value="Save"/>
+        <a href="#" class="cancel">cancel</a>
+    </div>
+</form>

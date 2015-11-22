@@ -25,8 +25,13 @@
 
 </head>
 <body class="@bodyCssClass">
+
     <div id="container">
+        
+        <h1>@ViewBag.Title</h1>
+        
         @RenderBody()
+
     </div>
 
 @if (Model.ShowToolbar)

@@ -1,0 +1,27 @@
+﻿@model Scratch.Web.Models.Settings.ConnectionStringSettings
+
+@{
+    Layout = "~/Views/Settings/_Settings.cshtml";
+}
+
+@section Form
+{
+    <form>
+        <section>
+            <h2>SQL Client</h2>
+            <dl>
+                <dt>Expected Connection String Name</dt>
+                <dd>@Model.ExpectedName</dd>
+                <dt>Expected Provider Name</dt>
+                <dd>@Model.ExpectedProviderName</dd>
+                <dt>Actual Provider Name</dt>
+                <dd>@Model.ActualProviderName</dd>
+                <dt>Actual Connection String</dt>
+                <dd>@Model.ActualConnectionString</dd>
+            </dl>
+        </section>
+        <div>
+            <input class="cancel" type="reset" value="Hide"/>
+        </div>
+    </form>
+}

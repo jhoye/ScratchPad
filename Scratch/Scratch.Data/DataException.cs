@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Scratch.Data
 {
-    public class DataException : Exception
+    public class DataException : Exception, ISignal
     {
-        private string ContextualMessage { get; set; }
+        public Enums.Andons Andon { get; set; }
 
-        public DataException(string contextualMessage)
+        public List<string> Messages { get; set; }
+
+        public DataException(string message)
         {
-            ContextualMessage = contextualMessage;
+            Messages = new List<string> { message };
         }
     }
 }

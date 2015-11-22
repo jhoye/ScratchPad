@@ -8,29 +8,49 @@ namespace Scratch.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View(new IndexViewModel());
+            var model = new IndexViewModel();
+
+            Components.ContentTypes.Load(model);
+
+            return View(model);
         }
 
         public ActionResult Add()
         {
-            return Content("Add Content Type");
+            return View("ContentType", new ContentTypeViewModel());
         }
 
         public ActionResult Edit(Guid id)
         {
-            return Content("Edit Content Type: " + id);
+            var model = new ContentTypeViewModel
+            {
+                Id = id
+            };
+
+            Components.ContentTypes.Load(model);
+
+            return View("ContentType", model);
         }
 
         [HttpPost]
         public ActionResult Save(ContentTypeViewModel model)
         {
-            return Content("Save Content Type...");
+            Components.ContentTypes.Save(model);
+
+            return RedirectToAction("Edit", new { id = model.Id });
         }
 
         [HttpPost]
-        public ActionResult Delete(ContentTypeViewModel model)
+        public ActionResult Delete(Guid id)
         {
-            return Content("Delete Content Type...");
+            var model = new ContentTypeViewModel
+            {
+                Id = id
+            };
+
+            Components.ContentTypes.Delete(model);
+
+            return RedirectToAction("Index");
         }
     }
 }

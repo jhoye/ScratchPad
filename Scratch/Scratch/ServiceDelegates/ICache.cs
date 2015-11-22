@@ -1,6 +1,8 @@
-﻿namespace Scratch.ServiceDelegates
+﻿using Scratch.Data.Core;
+
+namespace Scratch.ServiceDelegates
 {
-    public interface ICache
+    public interface ICache : ISettingsConsumer
     {
         string Get(string slug);
 

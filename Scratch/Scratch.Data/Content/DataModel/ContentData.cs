@@ -2,10 +2,11 @@
 
 namespace Scratch.Data.Content.DataModel
 {
-    public class ContentData : DbContext
+    internal class ContentData : DbContext
     {
-        public ContentData() : base("name=ContentData")
+        public ContentData(string connectionString)
         {
+            Database.Connection.ConnectionString = connectionString;
         }
     }
 }

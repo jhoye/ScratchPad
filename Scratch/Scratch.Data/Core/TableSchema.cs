@@ -22,18 +22,9 @@ namespace Scratch.Data.Core
 	//      a. If not yet compiled: build SQL for CRUD operations
 	//      b. If compiled: Use a generic repository for CRUD operations
 
-	
-	/// <summary>
-	/// Handles SQL operations for generating database table schema
-	/// </summary>
-	public class TableSchema
+	public class TableSchema : DataBase
 	{
-		private string ConnectionString
-		{
-			get { return ""; }
-		}
-
-		public void CreateTable()
+        public void CreateTable()
 		{
 			var sql = @"
 				IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ContentTypes]') AND type in (N'U'))
@@ -51,7 +42,7 @@ namespace Scratch.Data.Core
 
 
 
-			using (var connection = new SqlConnection(ConnectionString))
+			using (var connection = new SqlConnection(Components.Configuration.ConnectionString))
 			{
 				connection.Open();
 

@@ -1,0 +1,46 @@
+﻿@model Scratch.Web.Models.Settings.GenericSettingsViewModel
+
+@{
+    Layout = "~/Views/Settings/_Settings.cshtml";
+}
+
+@section Form
+{
+    <form>
+        <section>
+            <h2>@Model.Settings.Description</h2>
+            @Html.HiddenFor(a => a.Name)
+            @Html.HiddenFor(a => a.Settings.Section)
+            @Html.HiddenFor(a => a.Settings.Description)
+            @if (Model.Settings.Settings.Any())
+            {
+                var i = 0;
+
+                foreach (var setting in Model.Settings.Settings)
+                {
+                    var id = "Settings.Settings[" + i++ + "]";
+                    var name = setting.Value.Name;
+                    var description = setting.Value.Description;
+
+                    <div class="field">
+                        <input type="hidden" name="@(id).Key" value="@setting.Key"/>
+                        <input type="hidden" name="@(id).Value.Name" value="@name"/>
+                        <input type="hidden" name="@(id).Value.Description" value="@description"/>
+                        <label for="@id">@name</label>
+                        <input id="@id" name="@(id).Value.Value" type="text" value="@setting.Value.Value" title="@description" placeholder="@description"/>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>There are currently no editable settings.</p>
+            }
+        </section>
+        @if (Model.Settings.Settings.Any())
+        {
+            <div>
+                <input class="save" type="button" value="Save" />
+            </div>
+        }
+    </form>
+}

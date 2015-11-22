@@ -13,5 +13,10 @@ namespace Scratch.Web.Controllers
 
             return View(new IndexViewModel());
         }
+
+        public ActionResult About()
+        {
+            return View(new AboutViewModel());
+        }
     }
 }

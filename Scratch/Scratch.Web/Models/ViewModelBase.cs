@@ -2,7 +2,7 @@
 
 namespace Scratch.Web.Models
 {
-    public abstract class ViewModelBase
+    public abstract class ViewModelBase : DependentBase
     {
         #region MenuItems enumeration
 
@@ -84,7 +84,10 @@ namespace Scratch.Web.Models
             Treeview,
 
             [Description("Log Out")]
-            LogOut
+            LogOut,
+
+            [Description("About")]
+            About
         }
 
         #endregion

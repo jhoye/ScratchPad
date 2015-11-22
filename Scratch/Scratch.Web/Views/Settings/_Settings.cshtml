@@ -1,42 +1,50 @@
-﻿@using Scratch.Web.Models.Settings
+﻿@using Scratch
 
-@model SettingsBase
+@model Scratch.Web.Models.Settings.SettingsViewModelBase
 
 @{
     Layout = null;
 }
 
 <td class="andon">
-    @switch (Model.Status)
+    @switch (Model.Andon)
     {
-        case SettingsBase.Statuses.None:
-            <img src="~/Content/fugue/status-offline.png" alt="no status" />
+        case Enums.Andons.Green:
+            <img src="~/Content/fugue/status.png" alt="system is running well" />
             break;
-        case SettingsBase.Statuses.Green:
-        <img src="~/Content/fugue/status.png" alt="system is running well" />
-            break;
-        case SettingsBase.Statuses.Yellow:
+        case Enums.Andons.Yellow:
         <img src="~/Content/fugue/status-away.png" alt="attention is needed on this system" />
             break;
-        case SettingsBase.Statuses.Red:
+        case Enums.Andons.Red:
         <img src="~/Content/fugue/status-busy.png" alt="system is not running" />
+            break;
+        case Enums.Andons.None:
+        <img src="~/Content/fugue/status-offline.png" alt="no status" />
             break;
     }
 </td>
-<td class="name">@Model.Name</td>
+<td class="name">@Html.Raw(Model.Name.Replace(" ", "&nbsp;"))</td>
 <td>
     <div class="actions">
-        <a href="#" class="reload"><img src="~/Content/fugue/arrow-circle-double.png" alt="reload" title="reload" /></a>
-        <a href="#" class="edit"><img src="~/Content/fugue/pencil.png" alt="edit" title="edit" /></a>
+        <a href="#" class="edit"><img src="~/Content/fugue/chevron-expand.png" alt="show details" title="show details" /></a>
+        <a href="#" class="hide"><img src="~/Content/fugue/chevron.png" alt="hide details" title="hide details" /></a>
     </div>
 </td>
 <td class="status-message">
-    <p>@Model.StatusMessage</p>
-    <form>
-        @RenderSection("Form")
-        <div>
-            <input class="save" type="button" value="Save"/>
-            <input class="cancel" type="reset" value="Cancel" />
-        </div>
-    </form>
+    @if (Model.Messages.Count == 1)
+    {
+        <p>@Model.Messages.First()</p>
+    }
+    else if (Model.Messages.Count > 1)
+    {
+        <ul>
+            @foreach (var message in Model.Messages)
+            {
+                <li>
+                    <p>@message</p>
+                </li>
+            }
+        </ul>
+    }
+    @RenderSection("Form")
 </td>

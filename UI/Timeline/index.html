@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Timeline</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<style type="text/css">
+body {
+	margin: 0;
+}
+section {
+	display: inline-block;
+	height: 100px;
+	width: 100px;
+	background-color: #f0f0f0;
+	border: 1px #e0e0e0 solid;
+}
+header {
+	font: 10px monospace;
+	text-align: center;
+	line-height:100px;
+}
+</style>
+</head>
+<body>
+<div id="timeline"></div>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+$(function () {
+	
+	var timeline = $("#timeline"),
+		year = 1900,
+		section,
+		width = 0,
+		totalWidth = 0;
+		
+	while (year <= 1930) {
+		section = $('<section><header>' + year++ + '</header></section>');
+		timeline.append(section);
+		width = section[0].offsetWidth;
+		console.log("width: " + width + " (" + typeof width + ")");
+		totalWidth = totalWidth + width;
+	}
+	console.dir(section);
+	console.log("totalWidth :" + totalWidth);
+	timeline.css("width", totalWidth + "px");
+});
+</script>
+</body>
+</html>

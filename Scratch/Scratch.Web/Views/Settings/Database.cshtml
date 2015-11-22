@@ -1,4 +1,4 @@
-﻿@model Scratch.Web.Models.Settings.DatabaseSettings
+﻿@model Scratch.Web.Models.Settings.DatabaseSettingsViewModel
 
 @{
     Layout = "~/Views/Settings/_Settings.cshtml";
@@ -6,5 +6,45 @@
 
 @section Form
 {
-    <div>[FORM]</div>
+    <form>
+        <section>
+            <h2>Connection String</h2>
+            <dl>
+                <dt>Expected Connection String Name</dt>
+                <dd>@Model.ExpectedConnectionStringName</dd>
+                <dt>Expected Provider Name</dt>
+                <dd>@Model.ExpectedConnectionStringProviderName</dd>
+                <dt>Actual Provider Name</dt>
+                <dd>@Model.ActualConnectionStringProviderName</dd>
+                <dt>Actual Connection String</dt>
+                <dd>@Model.ActualConnectionString</dd>
+            </dl>
+        </section>
+        <section>
+            <h2>Table Schema</h2>
+            @if (Model.Exists)
+            {
+                <dl>
+                    @foreach (var table in Model.Tables)
+                    {
+                        <dt>@table.TableName</dt>
+                        <dd>@table.RecordCount records</dd>
+                    }
+                </dl>
+            }
+            else
+            {
+                <div class="field checkbox">
+                    @Html.CheckBoxFor(a => a.CreateIfNotExists)
+                    @Html.LabelFor(a => a.CreateIfNotExists)
+                </div>
+            }
+        </section>
+        @if (!Model.Exists)
+        {
+            <div>
+                <input class="save" type="button" value="Save" />
+            </div>
+        }
+    </form>
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Scratch.Data.Core.ContentMetadata;
+using Scratch.Data.Core.DataModel;
 
 namespace Scratch.Web.Models.ContentPalette
 {

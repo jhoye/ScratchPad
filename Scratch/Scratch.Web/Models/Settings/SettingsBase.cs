@@ -1,28 +1,22 @@
-﻿namespace Scratch.Web.Models.Settings
-{
-    public abstract class SettingsBase
-    {
-        public enum Statuses
-        {
-            None,
-            Green,
-            Yellow,
-            Red
-        }
+﻿using System.Collections.Generic;
 
-        public Statuses Status { get; set; }
+namespace Scratch.Web.Models.Settings
+{
+    public abstract class SettingsBase : ISignal
+    {
+        public Enums.Andons Andon { get; set; }
+
+        public List<string> Messages { get; set; }
 
         public readonly string Name;
-
-        public string StatusMessage { get; set; }
 
         protected SettingsBase(string name)
         {
             Name = name;
 
-            Status = Statuses.None;
+            Andon = Enums.Andons.None;
 
-            StatusMessage = "Loading...";
+            Messages = new List<string>();
         }
     }
 }

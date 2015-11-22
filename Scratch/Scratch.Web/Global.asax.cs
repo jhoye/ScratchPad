@@ -29,6 +29,9 @@ namespace Scratch.Web
                     items.Add(key, new Components
                     {
                         Cache = new Cache(),
+                        Configuration = new Configuration(),
+                        Mail = new Mail(),
+                        Settings = new Data.Core.Settings(),
                         Users = new Users()
                     });
                 }

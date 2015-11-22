@@ -41,25 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Core\ContentMetadata\IContentTypes.cs" />
-    <Compile Include="Data\Core\ContentMetadata\IContentType.cs" />
-    <Compile Include="Data\Core\ContentMetadata\IField.cs" />
+    <Compile Include="Data\Core\DataModel\ContentsTypeHierarchyListItem.cs" />
+    <Compile Include="Data\Core\DataModel\IContentTypeHierarchy.cs" />
+    <Compile Include="Data\Core\GenericSettings.cs" />
+    <Compile Include="Data\Core\IContentTypes.cs" />
+    <Compile Include="Data\Core\DataModel\IContentType.cs" />
+    <Compile Include="Data\Core\DataModel\IField.cs" />
+    <Compile Include="Data\Core\ISettings.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="DependentBase.cs" />
     <Compile Include="Components.cs" />
-    <Compile Include="Configuration.cs" />
-    <Compile Include="ConfigurationSections\IMailSettings.cs" />
-    <Compile Include="ConfigurationSections\Mail.cs" />
+    <Compile Include="Data\Configuration.cs" />
     <Compile Include="Data\IAuthenticationRequest.cs" />
+    <Compile Include="ISignal.cs" />
     <Compile Include="ServiceDelegates\ICache.cs" />
     <Compile Include="Data\IUsers.cs" />
-    <Compile Include="IConfiguration.cs" />
+    <Compile Include="Data\IConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\Core\DatabaseTableInfoListItem.cs" />
+    <Compile Include="Data\Core\IDatabaseSettings.cs" />
+    <Compile Include="Data\Core\ISettingsConsumer.cs" />
+    <Compile Include="Data\Core\GenericSettingsListItem.cs" />
+    <Compile Include="ServiceDelegates\IMail.cs" />
+    <Compile Include="SignalExtensions.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\ContentData\" />
-    <Folder Include="Data\Core\SystemData\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

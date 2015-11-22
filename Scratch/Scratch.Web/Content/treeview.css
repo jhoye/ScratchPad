@@ -10,12 +10,17 @@
 #tree li.tree {
     list-style: none;
     display: table;
-    padding: 0 0 5px 0;
+    padding: 0 0 10px 0;
     background: transparent url('treeview_sprite.png') repeat-y -64px 0;
+}
+
+#tree li.tree:first-child {
+    padding: 10px 0;
 }
 
 #tree li.tree:last-child {
     background-image: none;
+    padding: 0;
 }
 
 #tree li.tree section {

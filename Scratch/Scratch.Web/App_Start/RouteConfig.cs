@@ -16,6 +16,15 @@ namespace Scratch.Web
             });
 
             routes.MapRoute(
+                "About",
+                "Admin/About",
+                new
+                {
+                    controller = "Admin",
+                    action = "About"
+                });
+
+            routes.MapRoute(
                 "Admin", 
                 "Admin/{controller}/{action}/{id}", 
                 new
@@ -23,6 +32,15 @@ namespace Scratch.Web
                     controller = "Admin",
                     action = "Index",
                     id = UrlParameter.Optional
+                });
+
+            routes.MapRoute(
+                "Idea",
+                "Idea/Collect",
+                new
+                {
+                    controller = "Idea",
+                    action = "Collect"
                 });
 
             routes.MapRoute(

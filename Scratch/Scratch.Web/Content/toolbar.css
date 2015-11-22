@@ -1,4 +1,23 @@
-﻿#toolbar {
+﻿/***** website admin *****/
+
+body.website-admin #container {
+    margin: 0 0 0 100px;
+    font: 13px monospace;
+}
+
+body.website-admin a {
+    color: #0077dd;
+    text-decoration: none;
+}
+
+body.website-admin a:hover {
+    color: #0088ff;
+    text-decoration: underline;
+}
+
+/***** toolbar *****/
+
+#toolbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,6 +30,7 @@
     -moz-box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
     box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
 }
+
 #toolbar ul.menu,
 #toolbar-pane {
     display: table-cell;
@@ -18,9 +38,15 @@
     padding: 0;
     border-left: 1px #e0e0e0 solid;
 }
+
+#toolbar-pane form {
+    padding: 0 20px 20px 0;
+}
+
 #toolbar ul.menu li {
     list-style: none;
 }
+
 #toolbar ul.menu a {
     display: block;
     height: 20px;
@@ -31,20 +57,135 @@
     color: #000000;
     cursor: pointer;
 }
+
 #toolbar ul.menu a.active,
 #toolbar ul.menu a:hover {
     background: #f8f8f8;
     border-top: 1px #ededed solid;
     border-bottom: 1px #e8e8e8 solid;
 }
+
 #toolbar ul.menu img {
     margin: 0 0 -4px 0;
 }
+
 #toolbar ul.menu span {
     display: none;
 }
-/**********/
-body.website-admin #container {
-    margin: 0 0 0 100px;
-    font: 13px monospace;
+
+/***** table *****/
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+
+th {
+    border-bottom: 1px #888888 solid;
+}
+
+td {
+    border-bottom: 1px #e0e0e0 solid;
+}
+
+th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 10px 10px 10px 0;
+}
+
+/***** form *****/
+
+form section {
+    margin: 0 0 15px 0;
+    border: 1px #e0e0e0 solid;
+    border-top: 1px #e8e8e8 solid;
+    border-bottom: 1px #e8e8e8 solid;
+    padding: 0 0 15px 0;
+    border-radius: 15px;
+}
+
+form h2 {
+    margin: 0;
+    padding: 15px 15px 8px 15px;
+}
+
+form section p {
+    padding: 20px 0 0 15px;
+}
+
+form dl,
+form div.field {
+    padding: 0 15px;
+    margin: 0;
+}
+
+form dt,
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form div.field,
+form dt {
+    margin-top: 15px;
+}
+
+form dd {
+    margin-bottom: 15px;
+}
+
+form dt:after,
+form label:after {
+    content: ":";
+}
+
+form div.checkbox {
+    display: table;
+}
+
+form div.checkbox label,
+form div.checkbox input[type=checkbox] {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+form div.checkbox label {
+    padding-left: 5px;
+}
+
+form div.checkbox label:after {
+    content: "";
+}
+
+form input[type=button],
+form input[type=submit],
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+form input[type=text],
+form textarea,
+form dd {
+    font: inherit;
+    margin: 0;
+    display: block;
+    border: 1px #b0b0b0 solid;
+    min-height: 20px;
+    padding: 3px 10px;
+    line-height: 22px;
+    width: 98%;
+    overflow: hidden;
+}
+
+form textarea {
+    height: 115px;
+}
+
+form input[disabled=disabled],
+form dd {
+    background-color: #f0f0f0;
+    color: #888888;
 }
