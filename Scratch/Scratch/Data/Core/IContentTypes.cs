@@ -8,8 +8,14 @@ namespace Scratch.Data.Core
 
         void Load(IContentType contentType);
 
+        void Load(IField field);
+
         void Save(IContentType contentType);
 
+        void Save(IField field);
+
         void Delete(IContentType contentType);
+
+        void Delete(IField field);
     }
 }

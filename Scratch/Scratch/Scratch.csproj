@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Core\DataModel\ContentsTypeHierarchyListItem.cs" />
+    <Compile Include="Data\Core\DataModel\FieldListItem.cs" />
     <Compile Include="Data\Core\DataModel\IContentTypeHierarchy.cs" />
     <Compile Include="Data\Core\GenericSettings.cs" />
     <Compile Include="Data\Core\IContentTypes.cs" />

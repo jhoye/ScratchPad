@@ -9,6 +9,8 @@ namespace Scratch.Data.Core.DataModel
 
         string Name { get; set; }
 
+        Guid? ParentId { get; set; }
+
         List<IField> Fields { get; set; }
     }
 }

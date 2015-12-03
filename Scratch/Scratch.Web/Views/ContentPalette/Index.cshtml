@@ -23,10 +23,10 @@
                 <span class="toggle"></span>
             </section>
             <section class="tree-item">
-                <header>
+                <header class="actionable-item">
                     <span>@contentType.Name</span><span class="actions">
-                        <a class="empty icon pencil" title="Edit @contentType.Name" href="@Url.Action("Edit", "ContentPalette", new {id = contentType.Id})"></a>
-                        <a class="empty icon minus" title="Delete @contentType.Name" href="@Url.Action("Delete", "ContentPalette", new {id = contentType.Id})"></a>
+                        <a class="empty icon pencil" title="Edit @contentType.Name" href="@Url.Action("EditContentType", "ContentPalette", new { id = contentType.Id })"></a>
+                        <a class="empty icon minus confirm-delete" title="Delete @contentType.Name" href="@Url.Action("DeleteContentType", "ContentPalette", new { id = contentType.Id })"></a>
                     </span>
                 </header>
                 <ul class="tree">
@@ -50,51 +50,4 @@ else
     <p>No content types exist.</p>
 }
 <br />
-<a href="@Url.Action("Add", "ContentPalette")" class="icon plus">Add Content Type</a>
-
-@section Scripts
-{
-    <style>
-        #tree li.tree section.tree-item header span.actions {
-            visibility: hidden;
-        }
-
-        #tree li.tree section.tree-item header.hover span.actions {
-            padding: 7px 0;
-            background-color: #f8f8f8;
-            border: 1px #e8e8e8 solid;
-            border-radius: 7px;
-            visibility: visible;
-            margin-left: 4px;
-        }
-
-        #tree li.tree section.tree-item header span.actions a {
-            padding-right: 7px;
-            margin-left: 7px;
-            border-right: 1px #e8e8e8 solid;
-        }
-        
-        #tree li.tree section.tree-item header span.actions a:last-child {
-            padding-right: 7px;
-            border-right: none;
-        }
-        
-    </style>
-    <script type="text/javascript">
-        $(function() {
-
-            $("#tree li.tree section.tree-item header").each(function() {
-
-                var header = $(this);
-
-                header.mouseover(function() {
-                    header.addClass("hover");
-                }).mouseout(function() {
-                    header.removeClass("hover");
-                });
-
-            });
-
-        });
-    </script>
-}
+<a href="@Url.Action("AddContentType", "ContentPalette")" class="icon plus">Add Content Type</a>

@@ -1,0 +1,236 @@
+﻿@using Scratch
+
+@model Scratch.Web.Models.ContentPalette.FieldViewModel
+
+@{
+    ViewBag.Title = (Model.Id.HasValue ? "Edit" : "Add") + " Field";
+
+    Layout = "~/Views/Shared/_WebsiteAdminLayout.cshtml";
+}
+
+@helper option(Enums.FieldTypes fieldType)
+{
+    <option value="@fieldType" @(Model.FieldType == fieldType ? "selected=selected" : string.Empty)>@Enums.GetDescription(fieldType)</option>
+}
+
+<a href="@Url.Action("EditContentType", "ContentPalette", new { id = Model.ContentTypeId })" class="icon arrow-left">Return to Content Type</a>
+<br />
+@using (Html.BeginForm("SaveField", "ContentPalette"))
+{
+    <input name="Id" type="hidden" value="@(Model.Id.HasValue ? Model.Id.Value.ToString() : string.Empty)" />
+    @Html.HiddenFor(a => a.ContentTypeId)
+    <br/>
+
+    <section>
+        <div class="field">
+            @Html.LabelFor(a => a.Name)
+            @Html.TextBoxFor(a => a.Name, new {maxlength = "255"})
+            @Html.ValidationMessageFor(a => a.Name)
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(a => a.Description)
+            @Html.TextBoxFor(a => a.Description, new {maxlength = "255"})
+            @Html.ValidationMessageFor(a => a.Description)
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(a => a.OrderOfAppearance)
+            @Html.TextBoxFor(a => a.OrderOfAppearance, new {maxlength = "3", @class = "numeric-integer"})
+            @Html.ValidationMessageFor(a => a.OrderOfAppearance)
+        </div>
+
+        <div class="field">
+            <label for="FieldType">Field Type</label>
+            <select id="FieldType" name="FieldType">
+                <optgroup label="boolean">
+                    @option(Enums.FieldTypes.CheckBox)
+                    @option(Enums.FieldTypes.YesNoDropDown)
+                </optgroup>
+                <optgroup label="text">
+                    @option(Enums.FieldTypes.TextBox)
+                    @option(Enums.FieldTypes.TextArea)
+                    @option(Enums.FieldTypes.RichTextEditor)
+                </optgroup>
+                <optgroup label="date / time">
+                    @option(Enums.FieldTypes.Date)
+                    @option(Enums.FieldTypes.Time)
+                    @option(Enums.FieldTypes.DateTime)
+                </optgroup>
+                <optgroup label="options">
+                    @option(Enums.FieldTypes.DropDown)
+                    @option(Enums.FieldTypes.RadioButtonList)
+                    @option(Enums.FieldTypes.CheckBoxList)
+                </optgroup>
+                <optgroup label="number">
+                    @option(Enums.FieldTypes.Integer)
+                    @option(Enums.FieldTypes.Decimal)
+                    @option(Enums.FieldTypes.FloatingPointNumber)
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="field checkbox">
+            @Html.CheckBoxFor(a => a.IsNullable)
+            @Html.LabelFor(a => a.IsNullable)
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(a => a.StorageBytes)
+            @Html.TextBoxFor(a => a.StorageBytes, new { @type = "number" })
+        </div>
+
+        <div class="field" title="The maximum total number of digits">
+            @Html.LabelFor(a => a.Precision)
+            @Html.TextBoxFor(a => a.Precision, new { @type = "number", min = "1", max = "38" })
+        </div>
+
+        <div class="field" title="The number of digits to the right of the decimal point">
+            @Html.LabelFor(a => a.Scale)
+            @Html.TextBoxFor(a => a.Scale, new { @type = "number", min = "0" })
+        </div>
+    </section>
+    
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+
+            var ddlFieldType = $("#FieldType"),
+                chkIsNullable = $("#IsNullable"),
+                txtStorageBytes = $("#StorageBytes"),
+                txtPrecision = $("#Precision"),
+                txtScale = $("#Scale"),
+                handleFieldType = function(initializing) {
+
+                    var formatTextStorageBytes = function() {
+                            txtStorageBytes
+                                .attr("min", "1")
+                                .attr("max", "4000")
+                                .attr("step", "1")
+                                .attr("placeholder", "leave empty for MAX");
+                        },
+                        formatFloatinPointNumberStorageBytes = function() {
+                            txtStorageBytes
+                                .attr("min", "4")
+                                .attr("max", "8")
+                                .attr("step", "4")
+                                .attr("placeholder", "4 or 8");
+                        },
+                        enable = function(isNullable, storageBytes, precision, scale) {
+
+                            var toggleVisibility = function(element, show) {
+                                    if (show) {
+                                        element.closest(".field").show();
+                                    } else {
+                                        element.closest(".field").hide();
+                                    }
+                                };
+
+                            toggleVisibility(chkIsNullable, isNullable);
+                            toggleVisibility(txtStorageBytes, storageBytes);
+                            toggleVisibility(txtPrecision, precision);
+                            toggleVisibility(txtScale, scale);
+                        },
+                        assign = function(isNullable, storageBytes, precision, scale) {
+                            if (!initializing) {
+                                chkIsNullable.attr("checked", isNullable);
+                                txtStorageBytes.val(storageBytes);
+                                txtPrecision.val(precision);
+                                txtScale.val(scale);
+                            }
+                        };
+
+                    switch (ddlFieldType.val()) {
+                    case "CheckBox":
+                        enable(false, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "YesNoDropDown":
+                        enable(true, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "TextBox":
+                        formatTextStorageBytes();
+                        enable(false, true, false, false);
+                        assign(false, "255", "", "");
+                        break;
+                    case "TextArea":
+                        formatTextStorageBytes();
+                        enable(false, true, false, false);
+                        assign(false, "4000", "", "");
+                        break;
+                    case "RichTextEditor":
+                        enable(false, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "Date":
+                        enable(true, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "Time":
+                        enable(true, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "DateTime":
+                        enable(true, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "DropDown":
+                        enable(false, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "RadioButtonList":
+                        enable(false, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "CheckBoxList":
+                        enable(false, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "Integer":
+                        enable(true, false, false, false);
+                        assign(false, "", "", "");
+                        break;
+                    case "Decimal":
+                        enable(true, false, true, true);
+                        assign(false, "", "18", "0");
+                        txtScale.attr("max", "18");
+                        break;
+                    case "FloatingPointNumber":
+                        formatFloatinPointNumberStorageBytes();
+                        enable(true, true, false, false);
+                        assign(false, "4", "", "");
+                        break;
+                    }
+                };
+
+            ddlFieldType.change(function() {
+                handleFieldType(false);
+            });
+
+            txtPrecision.change(function() {
+
+                var n = function(e) {
+                        return (new Number(e.val())).valueOf();
+                    },
+                    precision = n(txtPrecision),
+                    scale = n(txtScale);
+
+                if (scale > precision) {
+                    txtScale.val(precision);
+                }
+
+                txtScale.attr("max", precision);
+            });
+
+            // initialization
+            handleFieldType(true);
+        });
+    </script>
+}

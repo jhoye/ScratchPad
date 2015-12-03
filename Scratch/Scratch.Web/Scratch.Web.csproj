@@ -207,6 +207,7 @@
     <Compile Include="Models\ContentPalette\ContentTypeViewModel.cs" />
     <Compile Include="Models\Authentication\LoginViewModel.cs" />
     <Compile Include="Models\Authentication\LogoutViewModel.cs" />
+    <Compile Include="Models\ContentPalette\FieldViewModel.cs" />
     <Compile Include="Models\ContentPalette\IndexViewModel.cs" />
     <Compile Include="Models\FileManager\IndexViewModel.cs" />
     <Compile Include="Models\Idea\IdeaViewModel.cs" />
@@ -253,6 +254,7 @@
     <Content Include="Views\Settings\Generic.cshtml" />
     <Content Include="Views\Admin\About.cshtml" />
     <Content Include="Views\ContentPalette\ContentType.cshtml" />
+    <Content Include="Views\ContentPalette\Field.cshtml" />
     <None Include="Views\Idea\Collect.cshtml" />
     <Content Include="Views\Page\Add.cshtml" />
     <None Include="Web.Debug.config">

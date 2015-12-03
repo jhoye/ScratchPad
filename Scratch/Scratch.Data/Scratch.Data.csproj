@@ -56,7 +56,6 @@
     <Compile Include="Core\DataModel\ContentType.cs" />
     <Compile Include="Core\DataModel\Field.cs" />
     <Compile Include="Core\DataModel\Setting.cs" />
-    <Compile Include="Core\FieldListItem.cs" />
     <Compile Include="Core\DataModel\CoreData.cs" />
     <Compile Include="Core\TableSchema.cs" />
     <Compile Include="DataBase.cs" />

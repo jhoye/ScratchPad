@@ -27,6 +27,14 @@ namespace Scratch.Data.Core.DataModel
             }
         }
 
+        public int? StorageBytes { get; set; }
+
+        public int? Precision { get; set; }
+
+        public int? Scale { get; set; }
+
+        public int OrderOfAppearance { get; set; }
+
         public Guid ContentTypeId { get; set; }
 
         public ContentType ContentType { get; set; }
@@ -46,9 +54,21 @@ namespace Scratch.Data.Core.DataModel
 
             Name = field.Name;
 
+            Description = field.Description;
+
             IsNullable = field.IsNullable;
 
             FieldType = field.FieldType;
+
+            StorageBytes = field.StorageBytes;
+
+            Precision = field.Precision;
+
+            Scale = field.Scale;
+
+            OrderOfAppearance = field.OrderOfAppearance;
+
+            ContentTypeId = field.ContentTypeId;
         }
 
         public void MapTo(IField field)
@@ -57,9 +77,21 @@ namespace Scratch.Data.Core.DataModel
 
             field.Name = Name;
 
+            field.Description = Description;
+
             field.IsNullable = IsNullable;
 
             field.FieldType = FieldType;
+
+            field.StorageBytes = StorageBytes;
+
+            field.Precision = Precision;
+
+            field.Scale = Scale;
+
+            field.OrderOfAppearance = OrderOfAppearance;
+
+            field.ContentTypeId = ContentTypeId;
         }
 
         public IField ToListItem()

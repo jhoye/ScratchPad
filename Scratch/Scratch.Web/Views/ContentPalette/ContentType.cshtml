@@ -1,4 +1,5 @@
-﻿@model Scratch.Web.Models.ContentPalette.ContentTypeViewModel
+﻿@using Scratch
+@model Scratch.Web.Models.ContentPalette.ContentTypeViewModel
 
 @{
     ViewBag.Title = (Model.Id.HasValue ? "Edit" : "Add") + " Content Type";
@@ -8,7 +9,7 @@
 
 <a href="@Url.Action("Index", "ContentPalette")" class="icon arrow-left">Return to List</a>
 <br />
-@using (Html.BeginForm("Save", "ContentPalette"))
+@using (Html.BeginForm("SaveContentType", "ContentPalette"))
 {
     @Html.HiddenFor(a => a.Id)
     <br />
@@ -18,7 +19,64 @@
             @Html.TextBoxFor(a => a.Name)
             @Html.ValidationMessageFor(a => a.Name)
         </div>
+        <div class="field">
+            @Html.LabelFor(a => a.ParentId)
+            @Html.DropDownListFor(a => a.ParentId, Model.ParentOptions)
+        </div>
     </section>
+
+    if (Model.Id.HasValue)
+    {
+        <h2>Fields</h2>
+        if (Model.Fields.Any())
+        {
+            <table>
+                <thead>
+                <tr>
+                    <th class="action">&nbsp;</th>
+                    <th class="widest">Name&nbsp;&amp;&nbsp;Description</th>
+                    <th>Field&nbsp;Type</th>
+                    <th>Nullable</th>
+                    <th>Storage&nbsp;Bytes</th>
+                    <th>Precision/Scale</th>
+                    <th class="action">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var field in Model.Fields.OrderBy(a => a.OrderOfAppearance).ThenBy(a => a.Name))
+                {
+                    <tr>
+                        <td class="action"><a class="empty icon pencil" title="Edit @field.Name" href="@Url.Action("EditField", "ContentPalette", new { id = field.Id })"></a></td>
+                        <td>@field.OrderOfAppearance. @field.Name (@field.Description)</td>
+                        <td>@Enums.GetDescription(field.FieldType)</td>
+                        <td>@(field.IsNullable ? "Yes" : "No")</td>
+                        @if (field.StorageBytes.HasValue)
+                        {
+                            <td>@field.StorageBytes.Value</td>
+                        }
+                        else
+                        {
+                            <td>&nbsp;</td>
+                        }
+                        @if (field.Precision.HasValue || field.Scale.HasValue)
+                        {
+                            <td>@(field.Precision.HasValue ? field.Precision.Value.ToString() : "null")/@(field.Scale.HasValue ? field.Scale.Value.ToString() : "null")</td>
+                        }
+                        else
+                        {
+                            <td>&nbsp;</td>
+                        }
+                        <td class="action"><a class="empty icon minus confirm-delete" title="Delete @field.Name" href="@Url.Action("DeleteField", "ContentPalette", new { id = field.Id })"></a></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        <div class="field">
+            <a class="icon plus" href=" @Url.Action("AddField", new {id = Model.Id}) ">Add Field</a>
+        </div>
+        <br />
+    }
 
     <div>
         <input type="submit" value="Save" />

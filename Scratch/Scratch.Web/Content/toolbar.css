@@ -15,6 +15,38 @@ body.website-admin a:hover {
     text-decoration: underline;
 }
 
+/***** action item UI *****/
+
+.actionable-item {
+    min-height: 16px;
+}
+
+.actionable-item span.actions {
+    visibility: hidden;
+}
+
+.actionable-item.hover span.actions {
+    padding: 7px 0;
+    background-color: #f8f8f8;
+    border: 1px #e8e8e8 solid;
+    border-radius: 7px;
+    visibility: visible;
+    margin-left: 4px;
+    position: relative;
+    z-index: 2;
+}
+
+.actionable-item span.actions a {
+    padding-right: 7px;
+    margin-left: 7px;
+    border-right: 1px #e8e8e8 solid;
+}
+
+.actionable-item span.actions a:last-child {
+    padding-right: 7px;
+    border-right: none;
+}
+
 /***** icons *****/
 
 .icon {
@@ -235,6 +267,22 @@ th, td {
     padding: 10px 10px 10px 0;
 }
 
+th.action,
+td.action {
+    width: 16px;
+}
+
+th.action:first-child,
+td.action:first-child {
+    padding-left: 15px;
+}
+
+th.widest,
+td.widest {
+    width: 50%;
+}
+
+
 /***** form *****/
 
 form section {
@@ -309,6 +357,15 @@ button {
 form input[type=text],
 form textarea,
 form dd {
+    width: 98%;
+    overflow: hidden;
+}
+
+form input[type=text],
+form input[type=number],
+form textarea,
+form select,
+form dd {
     font: inherit;
     margin: 0;
     display: block;
@@ -316,14 +373,38 @@ form dd {
     min-height: 20px;
     padding: 3px 10px;
     line-height: 22px;
-    width: 98%;
-    overflow: hidden;
+}
+
+form input[type=number] {
+    padding: 3px 3px 3px 10px;
+    min-width: 200px;
+}
+
+form optgroup {
+    font: inherit;
+}
+
+form optgroup:before {
+    content: attr(label);
+    display: block;
+    margin: 5px;
+    color: #888888;
+    font-style: italic;
+    border-bottom: 1px #888888 solid;
+}
+
+form optgroup option,
+form option {
+    font: inherit;
+    text-decoration: none;
+    padding: 0 10px;
 }
 
 form textarea {
     height: 115px;
 }
 
+form input[readonly=readonly],
 form input[disabled=disabled],
 form dd {
     background-color: #f0f0f0;

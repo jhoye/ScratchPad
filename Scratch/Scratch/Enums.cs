@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Scratch
 {
@@ -18,15 +21,36 @@ namespace Scratch
 
         public enum FieldTypes
         {
-            Boolean = 0,
-            UniqueIdentifier,
-            Text,
-            Integer,
-            Decimal,
-            FloatPointNumber,
+            [Description("Hidden")]
+            Hidden = 0,
+            [Description("Check Box")]
+            CheckBox,
+            [Description("Yes/No Drop-Down")]
+            YesNoDropDown,
+            [Description("Text Box")]
+            TextBox,
+            [Description("Text Area")]
+            TextArea,
+            [Description("Rich Text Area")]
+            RichTextEditor,
+            [Description("Date")]
             Date,
+            [Description("Time")]
             Time,
-            DateTime
+            [Description("Date and Time")]
+            DateTime,
+            [Description("Drop-Down")]
+            DropDown,
+            [Description("Radio Button List")]
+            RadioButtonList,
+            [Description("Check Box List")]
+            CheckBoxList,
+            [Description("Integer")]
+            Integer,
+            [Description("Decimal")]
+            Decimal,
+            [Description("Floating Point Number")]
+            FloatingPointNumber
         }
 
         #endregion

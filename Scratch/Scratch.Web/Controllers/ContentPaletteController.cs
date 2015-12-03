@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Scratch.Data.Core.DataModel;
 using Scratch.Web.Models.ContentPalette;
 
 namespace Scratch.Web.Controllers
@@ -15,33 +16,38 @@ namespace Scratch.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Add()
+        public ActionResult AddContentType()
         {
-            return View("ContentType", new ContentTypeViewModel());
+            var model = new ContentTypeViewModel();
+
+            Components.ContentTypes.Load((IContentTypeHierarchy)model);
+
+            return View("ContentType", model);
         }
 
-        public ActionResult Edit(Guid id)
+        public ActionResult EditContentType(Guid id)
         {
             var model = new ContentTypeViewModel
             {
                 Id = id
             };
 
-            Components.ContentTypes.Load(model);
+            Components.ContentTypes.Load((IContentType)model);
+            
+            Components.ContentTypes.Load((IContentTypeHierarchy)model);
 
             return View("ContentType", model);
         }
 
         [HttpPost]
-        public ActionResult Save(ContentTypeViewModel model)
+        public ActionResult SaveContentType(ContentTypeViewModel model)
         {
             Components.ContentTypes.Save(model);
 
-            return RedirectToAction("Edit", new { id = model.Id });
+            return RedirectToAction("EditContentType", new { id = model.Id });
         }
 
-        [HttpPost]
-        public ActionResult Delete(Guid id)
+        public ActionResult DeleteContentType(Guid id)
         {
             var model = new ContentTypeViewModel
             {
@@ -51,6 +57,43 @@ namespace Scratch.Web.Controllers
             Components.ContentTypes.Delete(model);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult AddField(Guid id)
+        {
+            return View("Field", new FieldViewModel
+            {
+                ContentTypeId = id
+            });
+        }
+
+        public ActionResult EditField(Guid id)
+        {
+            var model = new FieldViewModel
+            {
+                Id = id
+            };
+
+            Components.ContentTypes.Load(model);
+
+            return View("Field", model);
+        }
+
+        [HttpPost]
+        public ActionResult SaveField(FieldViewModel model)
+        {
+            Components.ContentTypes.Save(model);
+
+            return RedirectToAction("EditContentType", new {id = model.ContentTypeId});
+        }
+
+        public ActionResult DeleteField(Guid id)
+        {
+            var model = new FieldViewModel { Id = id };
+
+            Components.ContentTypes.Delete(model);
+
+            return RedirectToAction("EditContentType", new { id = model.ContentTypeId });
         }
     }
 }

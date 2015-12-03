@@ -80,14 +80,6 @@
         var toolbar = $("#toolbar"),
             toolbarPane = $("#toolbar-pane");
 
-        //toolbar
-        //    .mouseover(function() {
-        //        toolbarPane.show();
-        //    })
-        //    .mouseout(function() {
-        //        toolbarPane.hide();
-        //    });
-        
         toolbar.find("ul").each(function () {
 
             var ul = $(this),
@@ -120,6 +112,21 @@
                     });
                 });
             }
+        });
+
+        $(".actionable-item").each(function () {
+
+            var item = $(this);
+
+            item.mouseover(function () {
+                item.addClass("hover");
+            }).mouseout(function () {
+                item.removeClass("hover");
+            });
+        });
+
+        $(".confirm-delete").on("click", function () {
+            return confirm("Data will be permanently deleted.");
         });
 
         //$("html").click(function () {

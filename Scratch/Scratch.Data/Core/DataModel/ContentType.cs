@@ -36,6 +36,8 @@ namespace Scratch.Data.Core.DataModel
 
             Name = contentType.Name;
 
+            ParentId = contentType.ParentId;
+
             Fields = contentType.Fields.Select(a => new Field(a)).ToList();
         }
 
@@ -44,6 +46,8 @@ namespace Scratch.Data.Core.DataModel
             contentType.Id = Id;
 
             contentType.Name = Name;
+
+            contentType.ParentId = ParentId;
 
             contentType.Fields = Fields == null 
                 ? new List<IField>() 

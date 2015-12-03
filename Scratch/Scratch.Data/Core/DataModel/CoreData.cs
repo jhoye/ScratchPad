@@ -101,7 +101,24 @@ namespace Scratch.Data.Core.DataModel
                 .IsRequired();
 
             modelBuilder.Entity<Field>()
+                .Property(a => a.StorageBytes)
+                .IsOptional();
+
+            modelBuilder.Entity<Field>()
+                .Property(a => a.Precision)
+                .IsOptional();
+
+            modelBuilder.Entity<Field>()
+                .Property(a => a.Scale)
+                .IsOptional();
+
+            modelBuilder.Entity<Field>()
                 .Ignore(a => a.FieldType);
+
+            modelBuilder.Entity<Field>()
+                .HasRequired(a => a.ContentType)
+                .WithMany(a => a.Fields)
+                .HasForeignKey(a => a.ContentTypeId);
 
             #endregion
         }

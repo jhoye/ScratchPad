@@ -15,12 +15,12 @@
 }
 
 #tree li.tree:first-child {
-    padding: 10px 0;
+    padding: 8px 0;
 }
 
 #tree li.tree:last-child {
     background-image: none;
-    padding: 0;
+    background: transparent url('treeview_sprite.png') no-repeat -64px -8px;
 }
 
 #tree li.tree section {
